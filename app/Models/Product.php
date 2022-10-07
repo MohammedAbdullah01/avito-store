@@ -137,9 +137,8 @@ class Product extends Model
     public function getActivateProductAttribute()
     {
         if (!$this->activate) {
-            return 'badge bg-warning text-dark bi bi-exclamation-triangle me-1';
+            return "<span class='bage bg-warning float-right' style='top:2px;'>Is Being Reviewed</span>";
         }
-        return 'badge bg-success bi bi-check-circle me-1';
     }
 
 
@@ -190,8 +189,7 @@ class Product extends Model
 
         if ($this->sale_price) {
 
-            return "<span class='bage'>Sale</span>";
+            return "<span class='bage float-end'>Sale</span>";
         };
     }
-
 }

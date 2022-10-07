@@ -17,8 +17,9 @@
                         <li><a href="order.html">Orders</a></li>
                         @if (Auth::guard('supplier')->check())
                             @if ($supplier->id == Auth::guard('supplier')->user()->id)
-                            <li><a href="{{ route('supplier.edit', $supplier->slug) }}">Edit Profile</a></li>
-                            <li><a href="{{ route('supplier.edit', $supplier->slug) }}">{{ __('Change Password') }}</a></li>
+                                <li><a href="{{ route('supplier.edit', $supplier->slug) }}">Edit Profile</a></li>
+                                <li><a href="{{ route('supplier.edit', $supplier->slug) }}">{{ __('Change Password') }}</a>
+                                </li>
                             @endif
                         @endif
                     </ul>
@@ -108,9 +109,9 @@
                         @endif
                     </div>
                     <div class="dashboard-wrapper dashboard-user-profile">
-                        <div class="media">
+                        <div class="media" style="overflow: inherit">
                             @include('front.layouts.inc.__products')
-                            
+
                         </div>
                     </div>
                 </div>

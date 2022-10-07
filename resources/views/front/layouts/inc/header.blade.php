@@ -82,6 +82,8 @@
     <link rel="stylesheet" href="{{ asset('frontEnd/plugins/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('frontEnd/plugins/slick/slick-theme.css') }}">
 
+    <link href="{{ asset('admin/assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet" />
+
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ asset('frontEnd/css/style.css') }}">
 
@@ -114,6 +116,9 @@
     <!-- slick Carousel -->
     <script src="{{ asset('frontEnd/plugins/slick/slick.min.js') }}"></script>
     <script src="{{ asset('frontEnd/plugins/slick/slick-animation.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
 
     <!-- Google Mapl -->
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>

@@ -66,8 +66,14 @@ Route::prefix('supplier')->name('supplier.')->group(function(){
         Route::put('/update/password/{id}'         , [ProfileController::class  , 'changePassword'])
             ->name('change.password');
 
+        Route::view('/profile/product/create'      ,'front.pages.suppliers.modal.create')
+            ->name('product.create');
+
         Route::post('/profile/product/store'       , [ProductController::class   , 'store'])
             ->name('product.store');
+
+        Route::get('/profile/{slug}/product/edit' , [ProductController::class   , 'show'])
+            ->name('product.edit');
 
         Route::put('/product/update/{product}'     , [ProductController::class   , 'update'])
             ->name('product.update');

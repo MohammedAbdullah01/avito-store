@@ -69,13 +69,12 @@ class ProductRepository implements ICrudRepository
 
     /**
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      */
     public function updateData($request, $pro)
     {
-        $request->validate($this->productModel::rules($pro->id, 'nullable'));
+        $request->validate($this->productModel::rules($pro, 'nullable'));
 
-        $product = $this->productModel::findOrFail($pro->id);
+        $product = $this->productModel::findOrFail($pro);
 
         $this->uploadFile($request->file('main_picture'), 'products', $product, 'main_picture', 'update');
 

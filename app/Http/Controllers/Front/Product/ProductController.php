@@ -7,12 +7,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Repositories\CategoryRepository;
 
 class ProductController extends Controller
 {
-    public function __construct(private ProductRepository $product)
+    public function __construct(private ProductRepository $product, CategoryRepository $categoryRepo)
     {
-        $this->product = $product;
+        $this->product       = $product;
+        $this->categoryRepo  = $categoryRepo;
     }
 
     public function index()
@@ -21,6 +23,18 @@ class ProductController extends Controller
             'front.pages.products.products_all',
             [
                 'products' => $this->product->getAll(request('search'))
+            ]
+        );
+    }
+
+    public function show($slug)
+    {
+        return view(
+            'front.pages.suppliers.modal.edit',
+            [
+                'product'    => $this->product->showData($slug),
+                'categories' => $this->categoryRepo->getAll(),
+
             ]
         );
     }
@@ -38,7 +52,7 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'You Cannot Update The Product');
         }
         $this->product->updateData($request, $product->id);
-        return redirect()->back()->with('success', 'The Product Has Been Successfully Updated');
+        return redirect()->route('supplier.profile' , Auth::guard('supplier')->user()->slug)->with('success', 'The Product Has Been Successfully Updated');
     }
 
     public function destroy(Product $product)

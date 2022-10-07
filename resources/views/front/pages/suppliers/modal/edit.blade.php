@@ -1,92 +1,90 @@
-<button class="btn btn-outline-success btn-sm " type="button" data-bs-target="#product_edit{{ $product->id }}"
-    data-bs-toggle="modal">
-    <i class="bi bi-pencil-square"></i>
-</button>
-
-<div class="modal fade" id="product_edit{{ $product->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered  modal-dialog modal-lg">
-        <div class="modal-content card shadow-lg p-3 mb-2 bg-body rounded">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ __('Edit Product') }}</h5>
-                <button type="button" class="btn-close btn btn-dark" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-
+<!-- Modal -->
+<div class="modal product-modal fade" id="product-modal-edit{{ $product->id }}">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i class="tf-ion-close"></i>
+    </button>
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
             <div class="modal-body">
-                <form action="{{ route('supplier.product.update', $product->id) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="container">
-                        <div class="row row-cols-2">
+                <div class="row">
 
-                            <x-product.input-lable-error lable="Title" name="title"
-                                placeholder="Enter The Product Title" :value="$product->title" />
+                    <form action="{{ route('supplier.product.update', $product->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-                            <x-product.select-product lable="Categories" name="category" :options="$categories"
+                        <div class="col-md-12">
+                            <x-input-error lable="Title" placeholder="Enter The Product Title" name="title"
+                                :value="$product->title" />
+                        </div>
+
+                        <div class="col-md-12">
+                            <x-select lable="Categories" name="category" :options="$categories" :options="$categories"
                                 :selected="$product->category_id" />
+                        </div>
 
-                            <x-product.input-lable-error col="col-md-4" lable="Original Price" name="price"
-                                :value="$product->price" placeholder="Enter The Original Price" />
+                        <div class="col-md-4">
+                            <x-input-error lable="Original Price" placeholder="Enter The Original Price" name="price"
+                                :value="$product->price" />
+                        </div>
 
-                            <x-product.input-lable-error col="col-md-4" lable="Sale Price" name="sale_price"
-                                :value="$product->sale_price" placeholder="Enter The Sale Price" />
+                        <div class="col-md-4">
+                            <x-input-error lable="Sale Price" placeholder="Enter The Sale Price" name="sale_price"
+                                :value="$product->sale_price" />
+                        </div>
 
-                            <x-product.input-lable-error col="col-md-4" lable="Quantity" name="quantity" type="number"
-                                :value="$product->quantity" placeholder="Enter The Quantity" />
+                        <div class="col-md-4">
+                            <x-input-error lable="Quantity" placeholder="Enter The Quantity" name="quantity"
+                                :value="$product->quantity" />
+                        </div>
 
-                            <x-product.input-lable-error col="col-md-12" lable="Description" name="description"
-                                :value="$product->description" placeholder="Enter The Product Description" />
+                        <div class="col-md-12">
+                            <x-input-error lable="Description" placeholder="Enter The Product Description"
+                                name="description" :value="$product->description" />
+                        </div>
 
-                            <x-product.input-lable-error lable="Color" name="color" data-role="tagsinput"
-                                :value="$product->color" placeholder="Enter The Product Color" />
+                        <div class="col-md-12">
+                            <x-input-error lable="Color" name="color" data-role="tagsinput"
+                                placeholder="Enter The Product Color" :value="$product->color" />
+                        </div>
 
-                            <x-product.input-lable-error lable="Size" name="size" data-role="tagsinput"
-                                :value="$product->size" placeholder="Enter The Product Size" />
+                        <div class="col-md-12">
+                            <x-input-error lable="Size" name="size" data-role="tagsinput"
+                                placeholder="Enter The Product Size" :value="$product->size" />
+                        </div>
 
-                            <x-product.input-lable-error type="file" lable="Main Picture" name="main_picture" />
-
-                            <x-product.input-lable-error type="file" lable="Sub Pictures" name="sub_images[]"
-                                multiple />
-
-                            <div class="form-group" style="margin-top:8px">
+                        <div class="col-md-12">
+                            <x-input-error type="file" lable="Main Picture" name="main_picture" />
+                            <div class="mb-3 mt-2  ">
                                 <img src="{{ $product->mainPictureProduct }}" class="img-thumbnail"
                                     style="height: 100px; width: 100px;">
                             </div>
-
-                            <div class="row row-cols-1 row-cols-md-3 ">
-                                @forelse ($product->images as $image)
-                                    <div class="col-6">
-                                        <div class="mb-3 mt-2  ">
-                                            <img src="{{ $image->subPictureProduct }}" class="img-thumbnail"
-                                                style="height: 100px; width: 100px;">
-                                        </div>
-                                    </div>
-                                @empty
-
-                                    <div class="col-md-12 ">
-                                        <div class=" alert alert-danger text-center mt-2">
-                                            {{ __('There Are No Sub Images !') }}
-                                        </div>
-
-                                    </div>
-                                @endforelse
-                            </div>
                         </div>
-                    </div>
 
-                    <div class="modal-footer mt-2">
-                        <button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal">
-                            {{ __('Close') }}
-                        </button>
-                        <button type="submit" class="btn btn-sm btn-outline-success">
-                            {{ __('Update') }}
-                        </button>
-                    </div>
-                </form>
+                        <div class="col-md-12">
+                            <x-input-error type="file" lable="Sub Pictures" name="sub_images[]" multiple />
+
+                            @forelse ($product->images as $image)
+                                <div class="col-md-3">
+                                    <div class="mb-3 mt-2  ">
+                                        <img src="{{ $image->subPictureProduct }}" class="img-thumbnail"
+                                            style="height: 100px; width: 100px;">
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-md-12 ">
+                                    <div class=" alert alert-danger text-center mt-2">
+                                        {{ __('There Are No Sub Images !') }}
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success btn-sm">{{ __('Update') }}</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </div>
     </div>
-</div>
+</div><!-- /.modal -->

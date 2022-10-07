@@ -1,4 +1,4 @@
-    <!-- Button trigger modal -->
+    {{-- <!-- Button trigger modal -->
     <button class="btn btn-outline-danger btn-sm " type="button" data-bs-target="#product_delete{{ $product->id }}"
         data-bs-toggle="modal">
         <i class="bi bi-trash-fill"></i>
@@ -41,4 +41,39 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
+
+
+    <!-- Modal -->
+    <div class="modal product-modal fade" id="product-modal-delete{{ $product->id }}">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="tf-ion-close"></i>
+        </button>
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <form action=" {{ route('supplier.delete', $product->id) }} " method="post">
+                            @csrf
+                            @method('DELETE')
+
+                            <div class="mb-3">
+                                <div class="text-center" style="margin-top:8px">
+                                    <img src="{{ $product->mainPictureProduct }}" class="img-thumbnail"
+                                        style="height: 100px">
+                                </div>
+                                <div class="modal-body text-danger text-center">
+                                    {{ __('Are You Sure You Want To Delete [ ' . $product->title . ' ] Product') }}
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger btn-sm">{{ __('Delete') }}</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal -->

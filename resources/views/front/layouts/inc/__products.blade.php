@@ -5,6 +5,7 @@
             <div class="product-item">
                 <div class="product-thumb">
                     {!! $product->saleProduct !!}
+                    {!!  $product->ActivateProduct  !!}
                     <img class="img-responsive " src="{{ $product->mainPictureProduct }}" alt="product-img"
                         style="height: 450px" />
                     <div class="preview-meta">
@@ -27,21 +28,33 @@
                                     </form>
                                 @endif
                             </li>
+
                             <li>
-                                <a href="#!"><i class="tf-ion-android-cart"></i></a>
+                                <span data-toggle="modal" data-target="#product-modal-edit{{ $product->id }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </span>
+                            </li>
+
+                            <li>
+                                <span data-toggle="modal" data-target="#product-modal-delete{{ $product->id }}">
+                                    <i class="bi bi-trash-fill"></i>
+                                </span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 @if ($product->supplier_id == Auth::guard('supplier')->id())
-                    <ul class="nav navbar-nav float-end">
+                    <ul class="nav navbar-nav float-start">
                         <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                                 data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="tf-ion-ios-arrow-down"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="buttons.html">Buttons</a></li>
+                                <li><a href="{{ route('supplier.product.edit', $product->slug) }}">Edit</a></li>
+                                <li><a href="buttons.html">
+
+
+                                    </a></li>
                                 <li><a href="alerts.html">Alerts</a></li>
                             </ul>
                         </li><!-- / Blog -->
@@ -68,6 +81,9 @@
             </div>
         </div>
 
+
+        @include('front.pages.suppliers.modal.delete')
+        @include('front.pages.suppliers.modal.edit')
 
         <!-- Modal -->
         <div class="modal product-modal fade" id="product-modal{{ $product->id }}">
