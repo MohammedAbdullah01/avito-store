@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <ol class="product-pagination text-right">
+                    <ol class="product-pagination text-end">
                         <li>
                             <a href="blog-left-sidebar.html">
                                 <i class="tf-ion-ios-arrow-left"></i>
@@ -77,11 +77,11 @@
 
                             <!-- thumb -->
                             @php
-                                $i = 2;
+                                $i = 1;
                             @endphp
                             <ol class='carousel-indicators mCustomScrollbar meartlab' style="text-align: center">
 
-                                <li data-target='#carousel-custom' data-slide-to='1'>
+                                <li data-target='#carousel-custom' data-slide-to='0'>
                                     <img src='{{ $product->MainPictureProduct }}' alt='' />
                                 </li>
                                 @forelse ($product->images as $image)
@@ -119,9 +119,6 @@
                         <form action=" {{ route('user.cart.store') }} " method="post">
                             @csrf
                             @method('POST')
-
-
-
 
                             <div class="product-size">
                                 <span>Color:</span>
@@ -359,40 +356,6 @@
             </div> --}}
         </div>
     </section>
-
-
-
-    <!-- Modal -->
-    <div class="modal product-modal fade" id="product-modal">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <i class="tf-ion-close"></i>
-        </button>
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="modal-image">
-                                <img class="img-responsive" src="images/shop/products/modal-product.jpg" />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="product-short-details">
-                                <h2 class="product-title">GM Pendant, Basalt Grey</h2>
-                                <p class="product-price">$200</p>
-                                <p class="product-short-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil cum. Illo
-                                    laborum numquam rem aut officia dicta cumque.
-                                </p>
-                                <a href="#!" class="btn btn-main">Add To Cart</a>
-                                <a href="#!" class="btn btn-transparent">View Product Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

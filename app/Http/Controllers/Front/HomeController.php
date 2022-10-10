@@ -14,12 +14,12 @@ class HomeController extends Controller
     public function __construct(
         private ProductRepository  $products,
         private SupplierProfile    $supplierRepo,
-        private CategoryRepository $categoryRepository,
+        private CategoryRepository $categoryRepo,
         private CommentRepository  $commentRepository,
     ) {
         $this->products           = $products;
         $this->supplierRepo       = $supplierRepo;
-        $this->categoryRepository = $categoryRepository;
+        $this->categoryRepo       = $categoryRepo;
     }
 
 
@@ -30,7 +30,7 @@ class HomeController extends Controller
         return view(
             'front.pages.index',
             [
-                'categories'    => $this->categoryRepository->getAll(),
+                'categories'    => $this->categoryRepo->getAll(),
                 'products'      => $this->products->getAll($search),
                 'top_products'  => $this->products->getTopProductsOrderCount()
             ]
@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function showProductsInCategory($slug)
     {
-        $category = $this->categoryRepository->showData($slug);
+        $category = $this->categoryRepo->showData($slug);
         $products = $category->products()->latest()->paginate();
         return view('front.pages.products.c_products', compact('category', 'products'));
     }
@@ -58,7 +58,8 @@ class HomeController extends Controller
             [
                 'product' => $this->products->showData($slug),
                 'products' => $this->products->getRelatedProducts($slug),
-                'comments' => $this->commentRepository->getCommentsToProduct($slug)
+                'comments' => $this->commentRepository->getCommentsToProduct($slug),
+                'categories' => $this->categoryRepo->getAll(),
             ]
         );
     }

@@ -6,9 +6,10 @@
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-body">
+                <h3>Edit Product</h3>
                 <div class="row">
 
-                    <form action="{{ route('supplier.product.update', $product->id) }}" method="POST"
+                    <form action="{{ route('supplier.product.update', $product) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -19,7 +20,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <x-select lable="Categories" name="category" :options="$categories" :options="$categories"
+                            <x-select lable="categories" name="category" :options="$categories" :options="$categories"
                                 :selected="$product->category_id" />
                         </div>
 

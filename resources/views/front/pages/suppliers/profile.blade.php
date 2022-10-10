@@ -7,8 +7,10 @@
     <x-breadcrumb pagetitle="Dashboard" lable="Suppplier" active="My Profile" />
 
 
+
     <section class="user-dashboard page-wrapper">
         <div class="container">
+            <x-alert />
             <div class="row">
                 <div class="col-md-12">
                     <ul class="list-inline dashboard-menu text-center">
@@ -17,7 +19,9 @@
                         <li><a href="order.html">Orders</a></li>
                         @if (Auth::guard('supplier')->check())
                             @if ($supplier->id == Auth::guard('supplier')->user()->id)
-                                <li><a href="{{ route('supplier.edit', $supplier->slug) }}">Edit Profile</a></li>
+                                <li>
+                                    @include('front.pages.suppliers.editProfile')
+                                </li>
                                 <li><a href="{{ route('supplier.edit', $supplier->slug) }}">{{ __('Change Password') }}</a>
                                 </li>
                             @endif
@@ -27,6 +31,31 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -97,7 +126,6 @@
 
     <section class="mt-3">
         <div class="container">
-            <x-alert />
             <div class="row">
                 <div class="col-md-12">
                     <div class="title text-center">

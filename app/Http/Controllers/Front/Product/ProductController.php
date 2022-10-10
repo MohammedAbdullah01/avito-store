@@ -33,7 +33,7 @@ class ProductController extends Controller
             'front.pages.suppliers.modal.edit',
             [
                 'product'    => $this->product->showData($slug),
-                'categories' => $this->categoryRepo->getAll(),
+                // 'categories' => $this->categoryRepo->getAll(),
 
             ]
         );

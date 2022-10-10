@@ -5,9 +5,9 @@
             <div class="product-item">
                 <div class="product-thumb">
                     {!! $product->saleProduct !!}
-                    {!!  $product->ActivateProduct  !!}
+                    {!! $product->ActivateProduct !!}
                     <img class="img-responsive " src="{{ $product->mainPictureProduct }}" alt="product-img"
-                        style="height: 450px" />
+                        style="height: 300px" />
                     <div class="preview-meta">
                         <ul>
                             <li>
@@ -43,23 +43,7 @@
                         </ul>
                     </div>
                 </div>
-                @if ($product->supplier_id == Auth::guard('supplier')->id())
-                    <ul class="nav navbar-nav float-start">
-                        <li class="dropdown dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                                data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="tf-ion-ios-arrow-down"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ route('supplier.product.edit', $product->slug) }}">Edit</a></li>
-                                <li><a href="buttons.html">
 
-
-                                    </a></li>
-                                <li><a href="alerts.html">Alerts</a></li>
-                            </ul>
-                        </li><!-- / Blog -->
-                    </ul><!-- / .nav .navbar-nav -->
-                @endif
                 <div class="product-content">
                     <h4>
                         <a href="{{ route('show.product', $product->slug) }}">
@@ -81,9 +65,11 @@
             </div>
         </div>
 
+        @if ($product->supplier_id == Auth::guard('supplier')->id())
+            @include('front.pages.suppliers.modal.delete')
+            @include('front.pages.suppliers.modal.edit')
+        @endif
 
-        @include('front.pages.suppliers.modal.delete')
-        @include('front.pages.suppliers.modal.edit')
 
         <!-- Modal -->
         <div class="modal product-modal fade" id="product-modal{{ $product->id }}">
@@ -116,7 +102,41 @@
                                     <p class="product-short-description">
                                         {{ $product->description }}
                                     </p>
-                                    <a href="cart.html" class="btn btn-main">Add To Cart</a>
+                                    <div class="single-product-details">
+                                        <form action=" {{ route('user.cart.store') }} " method="post">
+                                            @csrf
+                                            @method('POST')
+
+                                        <div class="product-size">
+                                            <span>Color:</span>
+                                            <select class="form-control" name="color">
+                                                @foreach ($product->theColors as $color)
+                                                    <option value="{{ $color }}">{{ $color }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="product-size">
+                                            <span>Size:</span>
+                                            <select class="form-control" name="size">
+                                                @foreach ($product->theSizes as $size)
+                                                    <option value="{{ $size }}">{{ $size }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="product-quantity">
+                                            <span>Quantity:</span>
+                                            <div class="product-quantity-slider">
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <input type="hidden" name="supplier_id"
+                                                    value="{{ $product->supplier_id }}">
+                                                <input class="form-group" id="product-quantity" type="text"
+                                                    value="1" name="product-quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if (Auth::guard('web')->check())
+                                        <a href="cart.html" class="btn btn-main">Add To Cart</a>
+                                    @endif
                                     <a href="{{ route('show.product', $product->slug) }}" class="btn btn-transparent">
                                         {{ __('View Product Details') }}
                                     </a>

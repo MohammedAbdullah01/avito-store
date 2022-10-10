@@ -59,6 +59,7 @@ class ProfileController extends Controller
 
     public function update(UpdateProfileRequest $request)
     {
+        
         $this->profileRepo->updateProfile($request);
         return redirect()->back()->with('success', 'Successfully Updated Profile');
     }

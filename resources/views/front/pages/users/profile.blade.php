@@ -7,7 +7,25 @@
     <div class="container">
 
         <!-- Nav Profile Breadcrumb -->
-        <x-breadcrumb pagetitle="My Profile" lable="Member" lableActive="My Profile" />
+        <x-breadcrumb pagetitle="My Profile" lable="Member" active="My Profile" />
+
+        <section class="user-dashboard page-wrapper">
+            <div class="container">
+                <x-alert/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-inline dashboard-menu text-center">
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="{{ route('user.profile', $user->slug) }}" class="active">Profile Details</a></li>
+                            <li><a href="order.html">Orders</a></li>
+                                    <li><a href="{{ route('user.edit', $user->slug) }}">Edit Profile</a></li>
+                                    <li><a href="{{ route('user.edit', $user->slug) }}">{{ __('Change Password') }}</a>
+                                    </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section class="section profile">
             <div class="row">

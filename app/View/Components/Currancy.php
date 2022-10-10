@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
 use NumberFormatter;
 
-class Currancy extends Component 
+class Currancy extends Component
 {
     public $amount;
     public function __construct($amount)
     {
         $formtter = new NumberFormatter(App::currentLocale(), NumberFormatter::CURRENCY);
-         $this->amount = $formtter->formatCurrency($amount , 'USD');
+         $this->amount = $formtter->formatCurrency($amount , 'EGP');
     }
 
     /**

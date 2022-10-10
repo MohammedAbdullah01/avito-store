@@ -39,4 +39,3 @@
 </body>
 
 </html>
-<link href="{{ asset('admin/assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet" />

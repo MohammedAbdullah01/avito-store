@@ -42,7 +42,7 @@ class AuthSupplierRepository extends AuthRepositoryAbstract
 
             $supplierName = Auth::guard('supplier')->user()->slug;
 
-            return redirect()->route('user.profile', $supplierName)->with('success', "Welcome, Sir. [ $supplierName ]");
+            return redirect()->route('supplier.profile', $supplierName)->with('success', "Welcome, Sir. [ $supplierName ]");
         }
         return redirect()->back()->with('error', "Incorrect Password Or Email");
     }

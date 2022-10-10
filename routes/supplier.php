@@ -75,7 +75,7 @@ Route::prefix('supplier')->name('supplier.')->group(function(){
         Route::get('/profile/{slug}/product/edit' , [ProductController::class   , 'show'])
             ->name('product.edit');
 
-        Route::put('/product/update/{product}'     , [ProductController::class   , 'update'])
+        Route::put('/product/{product}/update'    , [ProductController::class   , 'update'])
             ->name('product.update');
 
         Route::delete('/product/delete/{product}'  , [ProductController::class   , 'destroy'])
