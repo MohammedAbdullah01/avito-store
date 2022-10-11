@@ -4,14 +4,138 @@
         <div class="row">
             <div class="col-md-4 col-xs-12 col-sm-4">
                 <div class="contact-number">
-                    <i class="tf-ion-ios-telephone"></i>
-                    <span>0129- 12323-123123</span>
+                    <ul class="top-menu text-start list-inline">
+
+                        <!-- Dropdown !Authantcation  Sig In => Supplier , User  && Register => Supplier , User  -->
+                        @if (!Auth::guard('supplier')->check() && !Auth::guard('web')->check())
+                            <!-- li Sig In  -->
+                            <li class="dropdown search dropdown-slide">
+                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                                    {{ __('Sig In') }}
+                                </a>
+
+                                <ul class="dropdown-menu search-dropdown" style="inset: auto; margin: 6px">
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <a href="{{ route('user.login') }}">{{ __('User Sig In') }}</a>
+                                        </h5>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <a href="{{ route('supplier.login') }}">{{ __('supplier Sig In') }}</a>
+                                        </h5>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- li Register  -->
+                            <li class="dropdown search dropdown-slide">
+                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                                    {{ __('Register') }}
+                                </a>
+                                <ul class="dropdown-menu search-dropdown" style="inset: auto; margin: 6px">
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <a href="{{ route('user.register') }}">{{ __('User Register') }}</a>
+                                        </h5>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <a href="{{ route('supplier.register') }}">{{ __('supplier Register') }}</a>
+                                        </h5>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        <!-- Dropdown Supplier Authantcation -->
+                        @if (Auth::guard('supplier')->check())
+                            <li class="dropdown search dropdown-slide">
+                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                                    <img src="{{ Auth::guard('supplier')->user()->ImgSupplier }}" width="30"
+                                        height="30" alt="Profile" class="rounded-circle">
+                                    {{ Auth::guard('supplier')->user()->slug }}
+                                </a>
+                                <ul class="dropdown-menu search-dropdown"
+                                    style="left: 55px; right:unset; top: 60%; margin: 6px">
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <i class="bi bi-person"></i>
+                                            <a
+                                                href="{{ route('supplier.profile', Auth::guard('supplier')->user()->slug) }}">My
+                                                Profile</a>
+                                        </h5>
+                                    </li>
+
+                                    <hr>
+
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                            <a href="{{ route('supplier.logout') }}"
+                                                onclick="event.preventDefault(); document.getElementById('supplier_logout').submit();">
+                                                <strong>{{ __('Sign Out') }}</strong>
+                                            </a>
+                                        </h5>
+                                        <form action="{{ route('supplier.logout') }}" method="post"
+                                            id="supplier_logout">
+                                            @csrf
+                                            @method('POST')
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        <!-- Dropdown User Authantcation -->
+                        @if (Auth::guard('web')->check())
+                            <li class="dropdown search dropdown-slide">
+                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                                    <img src="{{ Auth::guard('web')->user()->ImgSupplier }}" width="30"
+                                        height="30" alt="Profile" class="rounded-circle">
+                                    {{ Auth::guard('web')->user()->slug }}
+                                </a>
+                                <ul class="dropdown-menu search-dropdown"
+                                    style="left: 55px; right:unset; top: 60%; margin: 6px">
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <i class="bi bi-person"></i>
+                                            <a href="{{ route('user.profile', Auth::guard('web')->user()->slug) }}">My
+                                                Profile</a>
+                                        </h5>
+                                    </li>
+
+                                    <hr>
+
+                                    <li>
+                                        <h5 class="media-heading">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                            <a href="{{ route('user.logout') }}"
+                                                onclick="event.preventDefault(); document.getElementById('user_logout').submit();">
+                                                <strong>{{ __('Sign Out') }}</strong>
+                                            </a>
+                                        </h5>
+                                        <form action="{{ route('user.logout') }}" method="post" id="user_logout">
+                                            @csrf
+                                            @method('POST')
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                    </ul>
+
+                    </ul>
                 </div>
             </div>
+
+            <!-- Site Logo -->
             <div class="col-md-4 col-xs-12 col-sm-4">
-                <!-- Site Logo -->
                 <div class="logo text-center">
-                    <a href="index.html">
+                    <a href="{{ route('home') }}">
                         <!-- replace logo here -->
                         <svg width="135px" height="29px" viewBox="0 0 155 29" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -27,9 +151,12 @@
                     </a>
                 </div>
             </div>
+
             <div class="col-md-4 col-xs-12 col-sm-4">
-                <!-- Cart -->
-                <ul class="top-menu text-right list-inline">
+
+                <ul class="top-menu text-end list-inline">
+
+                    <!-- Cart -->
                     <li class="dropdown cart-nav dropdown-slide">
                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
                                 class="tf-ion-android-cart"></i>Cart</a>
@@ -75,7 +202,7 @@
                             </ul>
                         </div>
 
-                    </li><!-- / Cart -->
+                    </li>
 
                     <!-- Search -->
                     <li class="dropdown search dropdown-slide">
@@ -83,11 +210,12 @@
                                 class="tf-ion-ios-search-strong"></i> Search</a>
                         <ul class="dropdown-menu search-dropdown">
                             <li>
-                                <form action="post"><input type="search" class="form-control" placeholder="Search...">
+                                <form action="post"><input type="search" class="form-control"
+                                        placeholder="Search...">
                                 </form>
                             </li>
                         </ul>
-                    </li><!-- / Search -->
+                    </li>
 
                     <!-- Languages -->
                     <li class="commonSelect">
@@ -97,13 +225,13 @@
                             <option>FR</option>
                             <option>ES</option>
                         </select>
-                    </li><!-- / Languages -->
+                    </li>
 
-                </ul><!-- / .nav .navbar-nav .navbar-right -->
+                </ul>
             </div>
         </div>
     </div>
-</section><!-- End Top Header Bar -->
+</section>
 
 
 <!-- Main Menu Section -->
@@ -239,7 +367,7 @@
                             <li><a href="blog-grid.html">Blog 2 Columns</a></li>
                             <li><a href="blog-single.html">Blog Single</a></li>
                         </ul>
-                    </li><!-- / Blog -->
+                    </li>
 
                     <!-- Shop -->
                     <li class="dropdown dropdown-slide">
@@ -251,12 +379,12 @@
                             <li><a href="buttons.html">Buttons</a></li>
                             <li><a href="alerts.html">Alerts</a></li>
                         </ul>
-                    </li><!-- / Blog -->
-                </ul><!-- / .nav .navbar-nav -->
+                    </li>
+                </ul>
 
             </div>
-            <!--/.navbar-collapse -->
-        </div><!-- / .container -->
+
+        </div>
     </nav>
 </section>
 

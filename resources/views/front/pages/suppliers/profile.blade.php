@@ -4,61 +4,9 @@
 
     @include('front.layouts.inc.nav')
 
-    <x-breadcrumb pagetitle="Dashboard" lable="Suppplier" active="My Profile" />
+    <x-breadcrumb pagetitle="Profile Details" lable="Suppplier" active="Profile Details" />
 
-
-
-    <section class="user-dashboard page-wrapper">
-        <div class="container">
-            <x-alert />
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="list-inline dashboard-menu text-center">
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="{{ route('supplier.profile', $supplier->slug) }}" class="active">Profile Details</a></li>
-                        <li><a href="order.html">Orders</a></li>
-                        @if (Auth::guard('supplier')->check())
-                            @if ($supplier->id == Auth::guard('supplier')->user()->id)
-                                <li>
-                                    @include('front.pages.suppliers.editProfile')
-                                </li>
-                                <li><a href="{{ route('supplier.edit', $supplier->slug) }}">{{ __('Change Password') }}</a>
-                                </li>
-                            @endif
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
+    <x-profile.page-wrapper-supplier :supplier="$supplier" />
 
     <section class="mt-3">
         <div class="container">
@@ -124,7 +72,7 @@
     </section>
 
 
-    <section class="mt-3">
+    <section class="mt-3" id="product">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -149,7 +97,7 @@
 
 
 
-
+    @include('front.pages.suppliers.modal.editProfile')
 
 
 

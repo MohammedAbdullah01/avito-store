@@ -18,8 +18,8 @@
                             <li><a href="dashboard.html">Dashboard</a></li>
                             <li><a href="{{ route('user.profile', $user->slug) }}" class="active">Profile Details</a></li>
                             <li><a href="order.html">Orders</a></li>
-                                    <li><a href="{{ route('user.edit', $user->slug) }}">Edit Profile</a></li>
-                                    <li><a href="{{ route('user.edit', $user->slug) }}">{{ __('Change Password') }}</a>
+                                    {{-- <li><a href="{{ route('user.edit', $user->slug) }}">Edit Profile</a></li>
+                                    <li><a href="{{ route('user.edit', $user->slug) }}">{{ __('Change Password') }}</a> --}}
                                     </li>
                         </ul>
                     </div>
@@ -27,7 +27,7 @@
             </div>
         </section>
 
-        <section class="section profile">
+        {{-- <section class="section profile">
             <div class="row">
 
                 <x-alert />
@@ -92,7 +92,7 @@
                             <!-- Start Tab Content -->
                             <div class="tab-content pt-2">
 
-                                {{-- Profile Overview --}}
+                                <!-- Profile Overview -->
                                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                     <h5 class="card-title">{{ __('About Me') }}</h5>
                                     <p class="small fst-italic">
@@ -197,12 +197,12 @@
                     </div>
                 </div>
 
-                {{-- WishList && Purchases --}}
+                <!-- WishList && Purchases-->
                 <div class="col-md-12">
                     <div class="card shadow-lg p-3 mb-5 bg-body rounded">
                         <div class="card-body pt-3">
 
-                            {{-- Bordered Tabs --}}
+                            <!-- Bordered Tabs-->
                             <ul class="nav nav-tabs nav-tabs-bordered">
 
                                 <li class="nav-item">
@@ -226,7 +226,7 @@
 
                             <div class="tab-content pt-2">
 
-                                {{-- tab Profile Wishlist --}}
+                                <!-- tab Profile Wishlist-->
                                 <div class="tab-pane fade show active" id="profile-wishlist">
                                     <section class="bg0 p-t-23 mb-5 ">
                                         <div class="container">
@@ -373,7 +373,7 @@
                 </div>
 
             </div>
-        </section>
+        </section> --}}
 
     </div>
 @endsection

@@ -1,10 +1,10 @@
-<x-input-error name="token" type="hidden" value="{{ $token }}" />
+<x-form.input-error name="token" type="hidden" value="{{ $token }}" />
 
-<x-input-error placeholder="Email" name="email" type="email" value="{{ $email }}" />
+<x-form.input-error placeholder="Email" name="email" type="email" value="{{ $email }}" />
 
-<x-input-error placeholder="Password" name="password" type="password" />
+<x-form.input-error placeholder="Password" name="password" type="password" />
 
-<x-input-error placeholder="Password Confirm" name="password_confirmation" type="password" />
+<x-form.input-error placeholder="Password Confirm" name="password_confirmation" type="password" />
 
 <x-button value="Save" />
 

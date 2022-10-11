@@ -1,11 +1,11 @@
 
-<x-input-error placeholder="Username"         name="name"                    value="{{ old('name') }}"       />
+<x-form.input-error placeholder="Username"         name="name"                    value="{{ old('name') }}"       />
 
-<x-input-error placeholder="Email"            name="email"                   value="{{ old('email') }}"  type="email"    />
+<x-form.input-error placeholder="Email"            name="email"                   value="{{ old('email') }}"  type="email"    />
 
-<x-input-error placeholder="Password"         name="password"                type="password"                                />
+<x-form.input-error placeholder="Password"         name="password"                type="password"                                />
 
-<x-input-error placeholder="Password Confirm" name="password_confirmation"   type="password"                                />
+<x-form.input-error placeholder="Password Confirm" name="password_confirmation"   type="password"                                />
 
 <x-button value="Sign In" />
 

@@ -7,7 +7,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <i class="tf-ion-close"></i>
     </button>
-    <div class="modal-dialog " >
+    <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
@@ -17,32 +17,63 @@
                             @csrf
                             @method('PUT')
 
-                            <label  class="col-md-4 col-lg-3 col-form-label">
+                            <label class="col-md-4 col-lg-3 col-form-label">
                                 {{ __('Profile Image') }}
                             </label>
 
                             <div class="col-md-8 col-lg-9">
                                 <img class="img-thumbnail" src="{{ $supplier->ImgSupplier }}" style="max-width: 104px">
-                                <x-input-error type="file"  name="avatar" />
+                                <x-form.input-error type="file" name="avatar" />
                             </div>
-                            {{-- <x-profile.image-profile name="avatar" lable="Profile Image" /> --}}
 
-                            <x-profile.input-profile name="name" :value="$supplier->name" placeholder="Enter The FullName"
-                                lable="Full Name" />
+                            <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('Full Name') }}
+                            </label>
+                            
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.input-error name="name" :value="$supplier->name" placeholder="Enter The FullName" />
+                            </div>
 
-                            <x-profile.input-profile name="email" :value="$supplier->email" placeholder="Enter The Email"
-                                lable="Email" />
+                            <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('Email') }}
+                            </label>
 
-                            <x-profile.textarea-profile name="about" :value="$supplier->about"
-                                placeholder="Enter The About Me" lable="About Me" />
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.input-error name="email" :value="$supplier->email" placeholder="Enter The Email" />
+                            </div>
 
-                            <x-profile.input-profile name="phone" :value="$supplier->phone"
-                                placeholder="Enter The Phone Number" lable="Phone" />
+                            <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('Phone') }}
+                            </label>
 
-                            <x-profile.input-profile name="location" :value="$supplier->location" placeholder="Enter The Address"
-                                lable="Address" />
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.input-error name="phone" :value="$supplier->phone"
+                                    placeholder="Enter The Phone Number" />
+                            </div>
 
-                            <x-profile.select-profile name="gander" :value="$supplier->gander" lable="Gander" />
+                            <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('Address') }}
+                            </label>
+
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.input-error name="location" :value="$supplier->location" placeholder="Enter The Address" />
+                            </div>
+
+                            <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('Gander') }}
+                            </label>
+
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.gander_Select name="gander" :value="$supplier->gander" />
+                            </div>
+
+                            <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('About Me') }}
+                            </label>
+
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.textarea name="about" :value="$supplier->about" placeholder="Enter The About Me" />
+                            </div>
 
                             <x-button colorButton="success mt-3" value="Save" />
 
