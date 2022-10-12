@@ -57,16 +57,24 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function editPassword()
+    {
+        return view('front.pages.suppliers.changePasswordProfile' ,
+        [
+            'supplier' => $this->profileRepo->getSupplier()
+        ]);
+    }
+
     public function update(UpdateProfileRequest $request)
     {
-        
+
         $this->profileRepo->updateProfile($request);
         return redirect()->back()->with('success', 'Successfully Updated Profile');
     }
 
     public function changePassword(ChangePasswordProfileRequest $request)
     {
-        $this->profileRepo->changePassword($request);
-        return redirect()->route('supplier.login')->with('success', 'Successfully Changed Password');
+        return $this->profileRepo->changePassword($request);
+        
     }
 }

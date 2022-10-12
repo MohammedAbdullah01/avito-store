@@ -57,7 +57,7 @@ class SupplierProfile implements IProfileRepository
             ->products()
             ->with('ratings')
             ->latest()
-            ->paginate();
+            ->paginate(2);
         return $products;
     }
 
@@ -110,16 +110,17 @@ class SupplierProfile implements IProfileRepository
     {
 
         $supplier = $this->getSupplier();
-        if (!Hash::check($request->post('old_password'), $supplier->password)) {
+        if (Hash::check($request->post('old_password'), $supplier->password)) {
 
-            return redirect()->back()->with('error', 'The Old Password Is Incorrect');
+            $supplier->password = Hash::make($request->post('password'));
+            $supplier->save();
+
+            Auth::guard('supplier')->logout();
+            return redirect()->route('supplier.login')->with('success', 'Successfully Changed Password');
         }
-        $supplier->password = Hash::make($request->post('password'));
-        $supplier->save();
+        return redirect()->back()->with('error', 'The Old Password Is Incorrect');
 
-        Auth::guard('supplier')->logout();
-
-        return true;
+        // return true;
     }
 
     public function destroySupplier($id)

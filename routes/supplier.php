@@ -58,12 +58,15 @@ Route::prefix('supplier')->name('supplier.')->group(function(){
             ->name('profile');
 
         Route::get('/profile/{name}/edit'          , [ProfileController::class  , 'edit'])
-            ->name('edit');
+            ->name('edit.profile');
 
         Route::put('/profile/update'               , [ProfileController::class  , 'update'])
             ->name('update');
 
-        Route::put('/update/password/{id}'         , [ProfileController::class  , 'changePassword'])
+        Route::get('/profile/{name}/changePassword', [ProfileController::class  , 'editPassword'])
+            ->name('edit.password');
+
+        Route::put('/update/password'              , [ProfileController::class  , 'changePassword'])
             ->name('change.password');
 
         Route::view('/profile/product/create'      ,'front.pages.suppliers.modal.create')

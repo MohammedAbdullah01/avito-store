@@ -87,6 +87,7 @@
                     <div class="dashboard-wrapper dashboard-user-profile">
                         <div class="media" style="overflow: inherit">
                             @include('front.layouts.inc.__products')
+                            {{ $products->links() }}
 
                         </div>
                     </div>
@@ -96,8 +97,68 @@
     </section>
 
 
+    <section class="user-dashboard page-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-wrapper user-dashboard">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Product Name</th>
+                                        <th>Order Count</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($orderProducts as $reports)
+                                        <tr>
 
-    @include('front.pages.suppliers.modal.editProfile')
+                                            <td>{{ $reports->product_name }}</td>
+                                            <td>{{ $reports->product_count }}</td>
+                                            <td>{{ $reports->sales }}</td>
+                                            <td>
+                                                <x-currancy :amount="$reports->price" />
+                                            </td>
+                                            <td>
+                                                <x-currancy :amount="$reports->total" />
+                                            </td>
+                                            <td><a href="order.html" class="btn btn-default">View</a></td>
+
+
+
+                                            <td>#451231</td>
+                                            <td>Mar 25, 2016</td>
+                                            <td>2</td>
+                                            <td>$99.00</td>
+                                            <td><span class="label label-primary">Processing</span></td>
+                                            <td><a href="order.html" class="btn btn-default">View</a></td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <th colspan="8">
+                                                <div class="alert alert-danger w-50 m-auto text-center">
+                                                    {{ 'There No Reports ' }} <i class="bi bi-emoji-frown-fill"></i>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
 
 
 
