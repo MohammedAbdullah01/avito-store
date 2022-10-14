@@ -4,6 +4,133 @@
 
     @include('front.layouts.inc.nav')
 
+    @if (count($carts))
+
+        <x-breadcrumb pagetitle="Cart" active="Cart" />
+
+        <div class="page-wrapper">
+            <div class="cart shopping">
+                <div class="container">
+                    <x-alert />
+                    <div class="row">
+                        <div class="col-lg-12 ">
+                            <div class="block">
+                                <form action="{{ route('user.cart.destroy') }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash-fill"></i>
+                                        {{ __('Delete The Entire Cart') }}</button>
+                                </form>
+                                <div class="product-list">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="">Item Name</th>
+                                                <th class="">Item Price</th>
+                                                <th class="">Item Quantity</th>
+                                                <th class="">Item Color</th>
+                                                <th class="">Item Size</th>
+                                                <th class="">Item Total</th>
+                                                <th class="">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($carts as $cart)
+                                                <tr class="">
+
+                                                    <td class="">
+                                                        <div class="product-info">
+                                                            <img width="80"
+                                                                src="{{ $cart->product->mainPictureProduct }}"
+                                                                alt="" />
+                                                            <a href="#!">{{ $cart->product->title }}</a>
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="">
+                                                        <x-currancy :amount="$cart->product->purchaseprice" />
+                                                    </td>
+
+                                                    <td class="">
+                                                        {{ $cart->product_quantity }}
+                                                    </td>
+
+                                                    <td class="">
+                                                        {{ $cart->color }}
+                                                    </td>
+
+                                                    <td class="">
+                                                        {{ $cart->size }}
+                                                    </td>
+
+                                                    <td class="">
+                                                        <x-currancy :amount="$cart->product_quantity *
+                                                            $cart->product->purchaseprice" />
+                                                    </td>
+
+                                                    <td class="">
+                                                        <a href="{{ route('user.product.cart.delete', $cart->id) }}" class="remove"
+                                                            onclick="event.preventDefault(); document.getElementById('remove_product_cart{{$cart->id}}').submit();">
+                                                            <i class="bi bi-x-circle-fill text-danger "></i>
+                                                        </a>
+                                                        <form action="{{ route('user.product.cart.delete', $cart->id) }}" method="post"
+                                                            id="remove_product_cart{{$cart->id}}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            <tr class="table-secondary">
+                                                <td colspan="5"><b> Total:</b></td>
+                                                <td>
+                                                    <b>
+                                                        <x-currancy :amount="$subtotal" />
+                                                    </b>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="checkout.html" class="btn btn-main pull-left">Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @else
+        <section class="empty-cart page-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="block text-center">
+                            <i class="bi bi-cart3"></i>
+                            <h2 class="text-center">{{ __('Your Cart Is Currently Empty') }}</h2>
+                            <p>{{ __('You Can Refer To The Products For Shopping') }}</p>
+                            <a href="{{ route('products.all') }}" class="btn btn-main mt-20">
+                                {{ __('Return To Shop') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    @endif
+
+
+
+
+
+
+
+
+
+
+
+
+    {{--
     <div class="bg0 p-t-75 p-b-85">
         <div class="container">
 
@@ -101,5 +228,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

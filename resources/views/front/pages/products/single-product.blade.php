@@ -6,6 +6,7 @@
 
     <section class="single-product">
         <div class="container">
+            <x-alert/>
             <div class="row">
                 <div class="col-md-6">
                     <ol class="breadcrumb">
@@ -48,7 +49,7 @@
 
             </div>
             <div class="row mt-20">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="single-product-slider">
                         <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
                             <div class='carousel-outer'>
@@ -98,7 +99,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+
+                <div class="col-md-6 ">
                     <div class="single-product-details">
                         <h2>{{ $product->title }}</h2>
                         <p class="product-price">
@@ -141,7 +143,7 @@
                                 <div class="product-quantity-slider">
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <input type="hidden" name="supplier_id" value="{{ $product->supplier_id }}">
-                                    <input id="product-quantity" type="text" value="1" name="product-quantity">
+                                    <input id="product_quantity" type="text" value="1" name="product_quantity">
                                 </div>
                             </div>
                             <div class="product-category">
@@ -166,7 +168,9 @@
                         </form>
                     </div>
                 </div>
+
             </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="tabCommon mt-20">

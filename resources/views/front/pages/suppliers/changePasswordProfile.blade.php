@@ -6,7 +6,7 @@
 
     <x-breadcrumb pagetitle="Change Password" lable="Suppplier" active="Change Password" />
 
-    <x-profile.page-wrapper-supplier :supplier="$supplier" />
+    <x-supplierProfile.page-wrapper-supplier :supplier="$supplier" />
 
     <section class="mt-3">
         <div class="container">

@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Repositories\Cart as RepositoriesCart;
+use App\Repositories\Cart\CartRepository;
 use Illuminate\View\Component;
 
 class CartMenu extends Component
@@ -13,7 +13,7 @@ class CartMenu extends Component
      *
      * @return void
      */
-    public function __construct(RepositoriesCart $cart) 
+    public function __construct(CartRepository $cart)
     {
         $this->cart = $cart ;
     }

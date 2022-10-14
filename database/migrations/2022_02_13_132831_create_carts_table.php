@@ -16,12 +16,12 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('cookie_id');
-            $table->foreignId('supplier_id')->nullable()->constrained('suppliers')->nullOnDelete();
-            $table->foreignId('product_id')->constrained('products')->onDelete('Cascade');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('Cascade')->onUpdate('Cascade');
-            $table->unsignedSmallInteger('quantity') ;
-            $table->string('size');
-            $table->string('color');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreignId('supplier_id')->nullable()->constrained('suppliers')->nullOnDelete();
+            $table->unsignedSmallInteger('quantity')->default(1) ;
+            $table->string('size')->nullable();
+            $table->string('color')->nullable();
             $table->unique(['cookie_id' , 'product_id']);
             $table->timestamps();
         });

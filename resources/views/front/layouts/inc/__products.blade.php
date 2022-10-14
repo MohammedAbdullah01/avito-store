@@ -12,34 +12,37 @@
                         <ul>
                             <li>
                                 <span data-toggle="modal" data-target="#product-modal{{ $product->id }}">
-                                    <i class="tf-ion-ios-search-strong"></i>
+                                    <i class="bi bi-cart4"></i>
                                 </span>
                             </li>
                             <li>
                                 @if (!Auth::guard('supplier')->check())
-                                    <form action="{{ route('user.favorite.products') }}" method="post">
+                                    <a href="{{ route('user.favorite.products.store') }}"
+                                        onclick="event.preventDefault(); document.getElementById('favorite_store').submit();">
+                                        <x-favorite :productId="$product->id" />
+                                    </a>
+                                    <form action="{{ route('user.favorite.products.store') }}" method="post"
+                                        id="favorite_store">
+                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
                                         @csrf
                                         @method('POST')
-                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                        <a>
-                                            {{-- <i class="tf-ion-ios-heart"></i> --}}
-                                            <x-favourite :productid="$product->id" />
-                                        </a>
                                     </form>
                                 @endif
                             </li>
 
-                            <li>
-                                <span data-toggle="modal" data-target="#product-modal-edit{{ $product->id }}">
-                                    <i class="bi bi-pencil-square"></i>
-                                </span>
-                            </li>
+                            @if ($product->supplier_id == Auth::guard('supplier')->id())
+                                <li>
+                                    <span data-toggle="modal" data-target="#product-modal-edit{{ $product->id }}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </span>
+                                </li>
 
-                            <li>
-                                <span data-toggle="modal" data-target="#product-modal-delete{{ $product->id }}">
-                                    <i class="bi bi-trash-fill"></i>
-                                </span>
-                            </li>
+                                <li>
+                                    <span data-toggle="modal" data-target="#product-modal-delete{{ $product->id }}">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </span>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -88,7 +91,7 @@
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="product-short-details">
-                                    <h2 class="product-title">{{ $product->title ?? '' }}</h2>
+                                    <h2 class="product-title">{{ $product->title }}</h2>
                                     <p class="product-price">
                                         @if ($product->sale_price)
                                             <del>
@@ -102,41 +105,48 @@
                                     <p class="product-short-description">
                                         {{ $product->description }}
                                     </p>
-                                    <div class="single-product-details">
-                                        <form action=" {{ route('user.cart.store') }} " method="post">
-                                            @csrf
-                                            @method('POST')
+                                    <form action=" {{ route('user.cart.store') }} " method="post">
+                                        @csrf
+                                        @method('POST')
+                                        <div class="single-product-details">
 
-                                        <div class="product-size">
-                                            <span>Color:</span>
-                                            <select class="form-control" name="color">
-                                                @foreach ($product->theColors as $color)
-                                                    <option value="{{ $color }}">{{ $color }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="product-size">
-                                            <span>Size:</span>
-                                            <select class="form-control" name="size">
-                                                @foreach ($product->theSizes as $size)
-                                                    <option value="{{ $size }}">{{ $size }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="product-quantity">
-                                            <span>Quantity:</span>
-                                            <div class="product-quantity-slider">
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <input type="hidden" name="supplier_id"
-                                                    value="{{ $product->supplier_id }}">
-                                                <input class="form-group" id="product-quantity" type="text"
-                                                    value="1" name="product-quantity">
+                                            <div class="product-size">
+                                                <span>Color:</span>
+                                                <select class="form-control" name="color">
+                                                    @foreach ($product->theColors as $color)
+                                                        <option value="{{ $color }}">{{ $color }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+
+                                            <div class="product-size">
+                                                <span>Size:</span>
+                                                <select class="form-control" name="size">
+                                                    @foreach ($product->theSizes as $size)
+                                                        <option value="{{ $size }}">{{ $size }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="product-quantity">
+                                                <span>Quantity:</span>
+                                                <div class="product-quantity-slider">
+                                                    <input type="hidden" name="product_id"
+                                                        value="{{ $product->id }}">
+                                                    <input type="hidden" name="supplier_id"
+                                                        value="{{ $product->supplier_id }}">
+                                                    <input class="form-group" id="product-quantity" type="text"
+                                                        value="1" name="product_quantity">
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
-                                    @if (Auth::guard('web')->check())
-                                        <a href="cart.html" class="btn btn-main">Add To Cart</a>
-                                    @endif
+                                        @if (Auth::guard('web')->check())
+                                        <button type="submit" class="btn btn-main mt-20">Add To Cart</button>
+                                        @endif
+                                    </form>
                                     <a href="{{ route('show.product', $product->slug) }}" class="btn btn-transparent">
                                         {{ __('View Product Details') }}
                                     </a>

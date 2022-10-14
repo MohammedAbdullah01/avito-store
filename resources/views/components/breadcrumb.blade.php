@@ -1,3 +1,8 @@
+@props([
+    'lable' => '',
+    'pagetitle' => '',
+    'active' => '',
+])
 <section class="page-header">
     <div class="container">
         <div class="row">

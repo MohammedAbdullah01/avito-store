@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
         //     ];
         // })->create();
 
-        $this->call(AdminSeeder::class);
+        // $this->call(AdminSeeder::class);
+        // $this->call(CategorySeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }

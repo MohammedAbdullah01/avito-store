@@ -6,26 +6,28 @@ use App\Repositories\AuthUserRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CommentRepository;
-
-
-
-use App\Repositories\Auth;
-use App\Repositories\AuthSupplierRepository;
-use App\Repositories\Cart as RepositoriesCart;
-use App\Repositories\Comment;
-use App\Repositories\Dashboard;
-use App\Repositories\Interfaces\AuthRepository;
-use App\Repositories\Interfaces\CartRepository;
-use App\Repositories\Interfaces\DashboardRepository;
-use App\Repositories\Interfaces\ProfileRepository;
-use App\Repositories\Interfaces\RatingRepository;
-use App\Repositories\Interfaces\TagsRepository;
+use App\Repositories\Cart\CartRepository ;
+use App\Repositories\Interfaces\ICartRepository;
 use App\Repositories\Interfaces\WishlistRepository;
-use App\Repositories\Products;
-use App\Repositories\Profile;
-use App\Repositories\Rating;
-use App\Repositories\Tags;
 use App\Repositories\Wishlist;
+
+
+// use App\Repositories\Auth;
+// use App\Repositories\AuthSupplierRepository;
+// use App\Repositories\Cart as RepositoriesCart;
+// use App\Repositories\Comment;
+// use App\Repositories\Dashboard;
+// use App\Repositories\Interfaces\AuthRepository;
+// use App\Repositories\Interfaces\DashboardRepository;
+// use App\Repositories\Interfaces\ProfileRepository;
+// use App\Repositories\Interfaces\RatingRepository;
+// use App\Repositories\Interfaces\TagsRepository;
+// use App\Repositories\Interfaces\WishlistRepository;
+// use App\Repositories\Products;
+// use App\Repositories\Profile;
+// use App\Repositories\Rating;
+// use App\Repositories\Tags;
+// use App\Repositories\Wishlist;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -37,18 +39,23 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(CartRepository::class, function ($app) {
-            return new RepositoriesCart;
-        });
-        $this->app->bind(AuthUserRepository::class, AuthUserRepository::class);
+        // $this->app->bind(CartRepository::class, function ($app) {
+        //     return new RepositoriesCart;
+        // });
+        $this->app->bind(AuthSupplierRepository::class , AuthSupplierRepository::class);
 
-        $this->app->bind(AuthSupplierRepository::class, AuthSupplierRepository::class);
+        $this->app->bind(AuthUserRepository::class     , AuthUserRepository::class);
 
-        $this->app->bind(ProductRepository::class, ProductRepository::class);
+        $this->app->bind(ProductRepository::class      , ProductRepository::class);
 
-        $this->app->bind(CategoryRepository::class, CategoryRepository::class);
+        $this->app->bind(CategoryRepository::class     , CategoryRepository::class);
 
-        $this->app->bind(CommentRepository::class, CommentRepository::class);
+        $this->app->bind(CommentRepository::class      , CommentRepository::class);
+
+        $this->app->bind(ICartRepository::class        , CartRepository::class);
+
+        $this->app->bind(WishlistRepository::class  , Wishlist::class);
+
 
 
 

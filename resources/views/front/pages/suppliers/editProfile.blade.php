@@ -6,7 +6,7 @@
 
     <x-breadcrumb pagetitle="Edit Profile" lable="Suppplier" active="Edit Profile" />
 
-    <x-profile.page-wrapper-supplier :supplier="$supplier" />
+    <x-supplierProfile.page-wrapper-supplier :supplier="$supplier" />
 
     <section class="mt-3">
         <div class="container">

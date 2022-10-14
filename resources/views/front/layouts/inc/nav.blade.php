@@ -93,8 +93,8 @@
                         @if (Auth::guard('web')->check())
                             <li class="dropdown search dropdown-slide">
                                 <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                    <img src="{{ Auth::guard('web')->user()->ImgSupplier }}" width="30"
-                                        height="30" alt="Profile" class="rounded-circle">
+                                    <img src="{{ Auth::guard('web')->user()->ImagUser }}" width="30" height="30"
+                                        alt="Profile" class="rounded-circle">
                                     {{ Auth::guard('web')->user()->slug }}
                                 </a>
                                 <ul class="dropdown-menu search-dropdown"
@@ -127,8 +127,6 @@
                         @endif
 
                     </ul>
-
-                    </ul>
                 </div>
             </div>
 
@@ -157,52 +155,7 @@
                 <ul class="top-menu text-end list-inline">
 
                     <!-- Cart -->
-                    <li class="dropdown cart-nav dropdown-slide">
-                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-                                class="tf-ion-android-cart"></i>Cart</a>
-                        <div class="dropdown-menu cart-dropdown">
-                            <!-- Cart Item -->
-                            <div class="media">
-                                <a class="pull-left" href="#!">
-                                    <img class="media-object" src="images/shop/cart/cart-1.jpg" alt="image" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                                    <div class="cart-price">
-                                        <span>1 x</span>
-                                        <span>1250.00</span>
-                                    </div>
-                                    <h5><strong>$1200</strong></h5>
-                                </div>
-                                <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-                            </div><!-- / Cart Item -->
-                            <!-- Cart Item -->
-                            <div class="media">
-                                <a class="pull-left" href="#!">
-                                    <img class="media-object" src="images/shop/cart/cart-2.jpg" alt="image" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                                    <div class="cart-price">
-                                        <span>1 x</span>
-                                        <span>1250.00</span>
-                                    </div>
-                                    <h5><strong>$1200</strong></h5>
-                                </div>
-                                <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-                            </div><!-- / Cart Item -->
-
-                            <div class="cart-summary">
-                                <span>Total</span>
-                                <span class="total-price">$1799.00</span>
-                            </div>
-                            <ul class="text-center cart-buttons">
-                                <li><a href="cart.html" class="btn btn-small">View Cart</a></li>
-                                <li><a href="checkout.html" class="btn btn-small btn-solid-border">Checkout</a></li>
-                            </ul>
-                        </div>
-
-                    </li>
+                    <x-cart-menu />
 
                     <!-- Search -->
                     <li class="dropdown search dropdown-slide">

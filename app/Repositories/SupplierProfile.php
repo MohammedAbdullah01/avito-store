@@ -57,7 +57,7 @@ class SupplierProfile implements IProfileRepository
             ->products()
             ->with('ratings')
             ->latest()
-            ->paginate(2);
+            ->paginate();
         return $products;
     }
 

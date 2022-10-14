@@ -37,13 +37,13 @@ class Cart implements InterfaceCartRepository
 
     public function total()
     {
-        // return 
+        // return
         // (float ) CartModels::where('cookie_id' , '=' , $this->getCookieId())
         //     ->join('products' , 'products.id' , '=' , 'carts.product_id')
         //     ->selectRaw('SUM(products.purchaseprice * carts.quantity) as total')
         //     ->value('total');
         return $this->all()->sum(function ($item) {
-            return   $subtotal =  $item->quantity * $item->product->purchaseprice;
+            return   $subtotal =  $item->quantity * $item->product->PurchasePrice;
         });
     }
 

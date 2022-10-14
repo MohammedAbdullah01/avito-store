@@ -51,18 +51,12 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        return view('front.pages.suppliers.editProfile' ,
-        [
-            'supplier' => $this->profileRepo->getSupplier()
-        ]);
-    }
-
-    public function editPassword()
-    {
-        return view('front.pages.suppliers.changePasswordProfile' ,
-        [
-            'supplier' => $this->profileRepo->getSupplier()
-        ]);
+        return view(
+            'front.pages.suppliers.editProfile',
+            [
+                'supplier' => $this->profileRepo->getSupplier()
+            ]
+        );
     }
 
     public function update(UpdateProfileRequest $request)
@@ -72,9 +66,18 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', 'Successfully Updated Profile');
     }
 
+    public function editPassword()
+    {
+        return view(
+            'front.pages.suppliers.changePasswordProfile',
+            [
+                'supplier' => $this->profileRepo->getSupplier()
+            ]
+        );
+    }
+
     public function changePassword(ChangePasswordProfileRequest $request)
     {
         return $this->profileRepo->changePassword($request);
-        
     }
 }

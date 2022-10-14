@@ -16,22 +16,18 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('number')->unique();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('first_name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('city');
-            $table->string('post_alcode');
-            $table->string('country');
-
-            $table->unsignedFloat('tax')->default(0);
-            $table->unsignedFloat('discount')->default(0);
+            $table->string('payment_method');
+            $table->foreignId('user_id')->constrained('users')->nullOnDelete();
+            $table->foreignId('supplier_id')->constrained('suppliers')->nullOnDelete();
             $table->unsignedFloat('total')->default(0);
-            
-            $table->enum('status' , ['pending' , 'paid' , 'shipped', 'processing'  , 'completed' , 'canceled'])->default('pending');
-            $table->enum('payment_status' , ['pending' , 'paid' , 'faild'])->default('pending');
+            $table->enum('status', ['pending', 'paid', 'shipped', 'processing', 'completed', 'canceled'])->default('pending');
+            $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
             $table->timestamps();
+
+
+            // $table->unsignedFloat('tax')->default(0);
+            // $table->unsignedFloat('discount')->default(0);
+
         });
     }
 

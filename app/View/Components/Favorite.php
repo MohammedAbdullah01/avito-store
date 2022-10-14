@@ -2,11 +2,11 @@
 
 namespace App\View\Components;
 
-use App\Models\FavouriteProduct;
+use App\Models\FavoriteProduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
-class Favourite extends Component
+class Favorite extends Component
 {
     /**
      * Create a new component instance.
@@ -14,21 +14,20 @@ class Favourite extends Component
      * @return void
      */
 
-public $productid;
-public $buttom;
+public $button;
 
-    public function __construct($productid)
+    public function __construct(public $productId)
     {
-        $this->productid = $productid;
-        $wishlist = FavouriteProduct::get();
+        $this->productId = $productId;
+        $wishlist = FavoriteProduct::get();
         foreach($wishlist as $item){
 
-            if( $item->product_id == $productid && $item->user_id == Auth::guard('web')->id()){
-                $this->buttom = "bi bi-heart-fill text-danger";
+            if( $item->product_id == $productId && $item->user_id == Auth::guard('web')->id()){
+                $this->button = "bi bi-heart-fill text-danger";
             }
         }
 
-       
+
     }
 
     /**
@@ -38,6 +37,6 @@ public $buttom;
      */
     public function render()
     {
-        return view('components.favourite');
+        return view('components.favorite');
     }
 }

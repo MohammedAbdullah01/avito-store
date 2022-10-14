@@ -80,7 +80,7 @@ class CartController extends Controller
     public function storeCheckout(Request $request)
     {
         $request->validate([
-            'first_name'  => 'required',
+            'first_name'  => 'required|string|between:6,max',
             'email'       => 'required|email',
             'phone'       => 'required',
             'address'     => 'required',

@@ -692,7 +692,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   top: 0;
   background-color: #f7f8f9;
   color: #7f7f7f;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .cart-buttons {

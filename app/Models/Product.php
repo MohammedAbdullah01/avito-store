@@ -88,11 +88,11 @@ class Product extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function favourites()
+    public function favorite()
     {
         return $this->belongsToMany(
             User::class,
-            'favourite_products',
+            'favorite_products',
             'product_id',
             'user_id',
             'id',

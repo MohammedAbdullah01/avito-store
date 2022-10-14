@@ -13,7 +13,7 @@ class CreateFavouriteProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('favourite_products', function (Blueprint $table) {
+        Schema::create('favorite_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
@@ -30,6 +30,6 @@ class CreateFavouriteProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favourite_products');
+        Schema::dropIfExists('favorite_products');
     }
 }
