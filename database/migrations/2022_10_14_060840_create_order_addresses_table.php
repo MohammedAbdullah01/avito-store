@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->enum('type', ['billing' , 'shipping']);
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('firstName');
+            $table->string('lastName');
             $table->string('email');
             $table->string('phone');
             $table->string('address');
             $table->string('city');
-            $table->string('post_alcode');
+            $table->string('postAlCode')->nullable();
             $table->char('country' , 3);
         });
     }

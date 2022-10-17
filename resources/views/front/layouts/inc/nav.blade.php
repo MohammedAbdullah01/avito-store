@@ -56,7 +56,7 @@
                                 <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                     <img src="{{ Auth::guard('supplier')->user()->ImgSupplier }}" width="30"
                                         height="30" alt="Profile" class="rounded-circle">
-                                    {{ Auth::guard('supplier')->user()->slug }}
+                                    {{ Auth::guard('supplier')->user()->SupplierName }}
                                 </a>
                                 <ul class="dropdown-menu search-dropdown"
                                     style="left: 55px; right:unset; top: 60%; margin: 6px">
@@ -95,7 +95,7 @@
                                 <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                     <img src="{{ Auth::guard('web')->user()->ImagUser }}" width="30" height="30"
                                         alt="Profile" class="rounded-circle">
-                                    {{ Auth::guard('web')->user()->slug }}
+                                    {{ Auth::guard('web')->user()->UserName }}
                                 </a>
                                 <ul class="dropdown-menu search-dropdown"
                                     style="left: 55px; right:unset; top: 60%; margin: 6px">

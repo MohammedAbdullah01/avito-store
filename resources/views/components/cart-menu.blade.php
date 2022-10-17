@@ -1,51 +1,55 @@
 <!-- Cart -->
-<li class="dropdown cart-nav dropdown-slide">
-    <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-            class="tf-ion-android-cart"></i>Cart</a>
-    <div class="dropdown-menu cart-dropdown">
-        <!-- Cart Item -->
-        @forelse ($cart->getCart() as $item)
-            <div class="media">
-                <a class="pull-left" href="#!">
-                    <img class="media-object" src="{{ $item->product->mainPictureProduct }}" alt="image" />
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                    <div class="cart-price">
-                        <span>{{ $item->product_quantity }} x</span>
-                        <span>
-                            <x-currancy :amount="$item->product->purchase_price" />
-                        </span>
+@if (Auth::guard('web')->check())
+
+    <li class="dropdown cart-nav dropdown-slide">
+        <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+                class="tf-ion-android-cart"></i>Cart</a>
+        <div class="dropdown-menu cart-dropdown">
+            <!-- Cart Item -->
+            @forelse ($cart->getCart() as $item)
+                <div class="media">
+                    <a class="pull-left" href="#!">
+                        <img class="media-object" src="{{ $item->product->mainPictureProduct }}" alt="image" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
+                        <div class="cart-price">
+                            <span>{{ $item->product_quantity }} x</span>
+                            <span>
+                                <x-currancy :amount="$item->product->purchase_price" />
+                            </span>
+                        </div>
+                        <h5><strong></strong></h5>
                     </div>
-                    <h5><strong></strong></h5>
+                    <a href="{{ route('user.product.cart.delete', $item->id) }}" class="remove"
+                        onclick="event.preventDefault(); document.getElementById('remove_product_cart{{ $item->id }}').submit();">
+                        <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+                    </a>
+                    <form action="{{ route('user.product.cart.delete', $item->id) }}" method="post"
+                        id="remove_product_cart{{ $item->id }}">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    {{-- <a href="#!" class="remove"><i class="tf-ion-close"></i></a> --}}
                 </div>
-                <a href="{{ route('user.product.cart.delete', $item->id) }}" class="remove"
-                    onclick="event.preventDefault(); document.getElementById('remove_product_cart{{$item->id}}').submit();">
-                    <i class="bi bi-x-circle-fill text-danger fs-5"></i>
-                </a>
-                <form action="{{ route('user.product.cart.delete', $item->id) }}" method="post"
-                    id="remove_product_cart{{$item->id}}">
-                    @csrf
-                    @method('DELETE')
-                </form>
-                {{-- <a href="#!" class="remove"><i class="tf-ion-close"></i></a> --}}
+            @empty
+            @endforelse
+
+            <div class="cart-summary">
+                <span>Total</span>
+                <span class="total-price">
+                    <x-currancy :amount="$cart->totalCart()" />
+                </span>
             </div>
-        @empty
-        @endforelse
-
-        <div class="cart-summary">
-            <span>Total</span>
-            <span class="total-price">
-                <x-currancy :amount="$cart->totalCart()" />
-            </span>
+            <ul class="text-center cart-buttons">
+                <li><a href="{{ route('user.cart.index') }}" class="btn btn-small">View Cart</a></li>
+                <li><a href="{{ route('user.checkout.create') }}" class="btn btn-small btn-solid-border">Checkout</a>
+                </li>
+            </ul>
         </div>
-        <ul class="text-center cart-buttons">
-            <li><a href="{{route('user.cart.index')}}" class="btn btn-small">View Cart</a></li>
-            <li><a href="{{route('user.checkout.create')}}" class="btn btn-small btn-solid-border">Checkout</a></li>
-        </ul>
-    </div>
 
-</li>
+    </li>
+@endif
 
 
 

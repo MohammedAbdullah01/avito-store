@@ -19,4 +19,6 @@ interface ICartRepository
     public function emptyCart();
 
     public function totalCart() : float;
+
+    public function totalOneProduct($item) ;
 }

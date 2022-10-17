@@ -24,6 +24,10 @@ class CartController extends Controller
      */
     public function index()
     {
+        if($this->cartRepo->getCart()->count() == 0)
+        {
+            return view('front.pages.cart.emptyCart');
+        }
         return view('front.pages.cart.cart', [
             'carts' => $this->cartRepo->getCart(),
             'subtotal'  => $this->cartRepo->totalCart()

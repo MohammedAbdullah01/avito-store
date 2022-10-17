@@ -3,12 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Supplier;
-use App\Models\User;
-use App\Models\VerifyUser;
 use App\Repositories\abstract\AuthRepositoryAbstract;
-use App\Repositories\Interfaces\SendMailRepositoryInterface;
 use App\Repositories\trait\SendMail;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -54,16 +50,16 @@ class AuthSupplierRepository extends AuthRepositoryAbstract
     public function storeDataRegister($request)
     {
         $supplier   =  $this->supplier::create([
-
-            'name'     => $request->post('name'),
-            'slug'     => Str::slug($request->post('name')),
-            'email'    => $request->post('email'),
-            'password' => Hash::make($request->post('password'))
+            'firstName'  => $request->post('firstName'),
+            'lastName'   => $request->post('lastName'),
+            'slug'       => Str::slug($request->post('firstName').$request->post('lastName').uniqid()),
+            'email'      => $request->post('email'),
+            'password'   => Hash::make($request->post('password'))
         ]);
 
         $this->storeVerifyUser($supplier->id, 'supplier.verify', 'supplier_id');
 
-        $this->sendMailVerification($request->post('name'), $request->post('email'), $this->verify_url);
+        $this->sendMailVerification($request->post('firstName') . ' ' .$request->post('lastName') , $request->post('email'), $this->verify_url);
         return $supplier;
     }
 

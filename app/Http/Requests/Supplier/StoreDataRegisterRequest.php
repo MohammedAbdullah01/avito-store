@@ -24,7 +24,8 @@ class StoreDataRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  => 'required|alpha|unique:suppliers,name',
+            'firstName'             => 'required|alpha|between:4,15',
+            'lastName'              => 'required|alpha|between:4,15',
             'email'                 => 'required|email|string|unique:suppliers,email',
             'password'              => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required',

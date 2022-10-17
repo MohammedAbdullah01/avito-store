@@ -7,12 +7,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class Supplier extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['email_verified', 'name', 'slug', 'email', 'password', 'location', 'about', 'gander', 'phone', 'avatar'];
+    protected $fillable = [
+        'email_verified',
+        'firstName',
+        'lastName',
+        'slug',
+        'email',
+        'password',
+        'location',
+        'about',
+        'gander',
+        'phone',
+        'avatar'
+    ];
+
 
     public function products()
     {
@@ -21,7 +35,7 @@ class Supplier extends Authenticatable
 
     public function orderProducts()
     {
-        return $this->hasMany(order_product::class);
+        return $this->hasMany(orderProduct::class);
     }
 
     // Image_Suppliers
@@ -35,7 +49,13 @@ class Supplier extends Authenticatable
 
     public function orderSupplierProduct()
     {
-        return $this->hasMany(order_product::class);
+        return $this->hasMany(orderProduct::class);
+    }
+
+    public function getSupplierNameAttribute()
+    {
+        $userName = Str::title($this->firstName . ' ' .$this->lastName);
+        return $userName;
     }
 
 

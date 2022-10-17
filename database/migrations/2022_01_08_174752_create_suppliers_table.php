@@ -17,7 +17,8 @@ class CreateSuppliersTable extends Migration
             $table->id();
             $table->boolean('email_verified')->default(0);
             $table->boolean('status')->default(0);
-            $table->string('name')->unique();
+            $table->string('firstName');
+            $table->string('lastName');
             $table->string('slug')->unique();
             $table->string('email')->unique();
             $table->string('password');

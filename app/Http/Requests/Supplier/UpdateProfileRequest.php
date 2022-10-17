@@ -25,7 +25,8 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => "required|min:3|max:20|string",
+            'firstName'             => 'required|alpha|between:4,15',
+            'lastName'              => 'required|alpha|between:4,15',
             'email'    => "required|email|string|unique:suppliers,email,". Auth::guard('supplier')->id(),
             'phone'    => "nullable|string",
             'gander'   => "nullable|in:male,female",

@@ -4,7 +4,6 @@
 
     @include('front.layouts.inc.nav')
 
-    @if (count($carts))
 
         <x-breadcrumb pagetitle="Cart" active="Cart" />
 
@@ -93,7 +92,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="checkout.html" class="btn btn-main pull-left">Checkout</a>
+                                    <a href="{{route('user.checkout.create')}}" class="btn btn-main pull-left">Checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -101,23 +100,6 @@
                 </div>
             </div>
         </div>
-    @else
-        <section class="empty-cart page-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="block text-center">
-                            <i class="bi bi-cart3"></i>
-                            <h2 class="text-center">{{ __('Your Cart Is Currently Empty') }}</h2>
-                            <p>{{ __('You Can Refer To The Products For Shopping') }}</p>
-                            <a href="{{ route('products.all') }}" class="btn btn-main mt-20">
-                                {{ __('Return To Shop') }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-        </section>
-    @endif
 
 
 

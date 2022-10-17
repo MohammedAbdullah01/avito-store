@@ -8,45 +8,62 @@
     <div class="page-wrapper">
         <div class="checkout shopping">
             <div class="container">
-                <x-alert/>
+                <x-alert />
                 <div class="row">
                     <div class="col-md-8">
                         <div class="block billing-details">
                             <h4 class="widget-title">Billing Details</h4>
                             <form action="{{ route('user.checkout.store') }}" method="POST" class="checkout-form">
                                 @csrf
-                        @method('POST')
-                                <x-form.input-error lable="Full Name" name="first_name" :value="$user->name" />
+                                @method('POST')
+
+
+                                {{-- email
+                                phone
+                                address
+                                city
+                                postAlCode
+                                country --}}
+                                <x-form.input-error lable="First Name" name="address[billing][firstName]" :value="$user->firstName" />
+
+                                <x-form.input-error lable="Last Name" name="address[billing][lastName]" :value="$user->lastName" />
 
                                 <x-form.input-error type="email" lable="Email" placeholder="you@example.com"
-                                    name="email" :value="$user->email" />
+                                    name="address[billing][email]" :value="$user->email" />
 
-                                <x-form.input-error type="email" lable="Email" placeholder="you@example.com"
-                                    name="email" :value="$user->email" />
-
-                                <x-form.input-error lable="Phone" placeholder="01234...." name="phone"
+                                <x-form.input-error lable="Phone" placeholder="01234...." name="address[billing][phone]"
                                     :value="$user->phone" />
 
+                                <div class="form-group">
+                                    <select class="form-control " name="address[billing][country]" required>
+                                        @foreach ($countries as $code => $name)
+                                            <option value="{{ $code }}"
+                                                @if ($code == old('country')) selected @endif>
+                                                {{ $name }}</option>
+                                        @endforeach
+                                        <option>United States</option>
+                                    </select>
+                                    @error('country')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <x-form.input-error lable="City" name="address[billing][city]" />
+
+                                <x-form.input-error lable="Address" placeholder="1234 Main St" name="address[billing][address]"
+                                    :value="$user->location" />
+
                                     <div class="form-group">
-                                        <select class="form-control " name="country" required>
-                                            @foreach ($countries as $code => $name)
-                                                <option value="{{ $code }}"
-                                                    @if ($code == old('country')) selected @endif>
-                                                    {{ $name }}</option>
-                                            @endforeach -->
-                                            <option>United States</option>
+                                        <select class="form-control " name="payment_method" required>
+                                            <option value="CashOnDelivery">Cash On Delivery</option>
+                                            <option value="payPal">payPal</option>
                                         </select>
-                                        @error('country')
+                                        @error('payment_method')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
-                                <x-form.input-error lable="City" name="city" />
-
-                                <x-form.input-error lable="Address" placeholder="1234 Main St" name="address"
-                                    :value="$user->location" />
-
-                                    <x-button value="Place Order" />
+                                <x-button value="Place Order" />
                             </form>
                         </div>
                         {{-- <div class="block">

@@ -99,7 +99,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             Route::get('/cart/checkout'                   ,  [CheckOutController::class   , 'createCheckout' ])
                 ->name('checkout.create');
 
-            Route::post('/cart/checkout/store'            ,  [CartController::class   , 'storeCheckout' ])
+            Route::post('/cart/checkout/store'            ,  [CheckOutController::class   , 'store' ])
                 ->name('checkout.store');
 
             Route::get('/payment/paypal/{order}'          ,  [PaypalController::class , 'create' ])

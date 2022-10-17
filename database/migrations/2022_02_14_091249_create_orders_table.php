@@ -16,9 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('number')->unique();
-            $table->string('payment_method');
-            $table->foreignId('user_id')->constrained('users')->nullOnDelete();
-            $table->foreignId('supplier_id')->constrained('suppliers')->nullOnDelete();
+            $table->enum('payment_method' , ['CashOnDelivery','payPal'])->default('CashOnDelivery');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('supplier_id')->nullable()->constrained('suppliers')->nullOnDelete();
             $table->unsignedFloat('total')->default(0);
             $table->enum('status', ['pending', 'paid', 'shipped', 'processing', 'completed', 'canceled'])->default('pending');
             $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
 
             // $table->unsignedFloat('tax')->default(0);
             // $table->unsignedFloat('discount')->default(0);
+            // $table->unsignedFloat('shipping')->default(0);
 
         });
     }

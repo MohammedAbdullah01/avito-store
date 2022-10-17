@@ -3,11 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use App\Models\VerifyUser;
 use App\Repositories\abstract\AuthRepositoryAbstract;
-use App\Repositories\Interfaces\SendMailRepositoryInterface;
 use App\Repositories\trait\SendMail;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -54,22 +51,24 @@ class AuthUserRepository extends AuthRepositoryAbstract
     public function storeDataRegister($request)
     {
         $request->validate([
-            'name'                  => 'required|alpha|unique:users,name',
+            'firstName'             => 'required|alpha|between:4,15',
+            'lastName'              => 'required|alpha|between:4,15',
             'email'                 => 'required|email|string|unique:users,email',
             'password'              => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required',
+            'password_confirmation' => 'required|string',
         ]);
         $user   =  $this->user::create([
 
-            'name'     => $request->post('name'),
-            'slug'     => Str::slug($request->post('name')),
-            'email'    => $request->post('email'),
-            'password' => Hash::make($request->post('password'))
+            'firstName'  => $request->post('firstName'),
+            'lastName'   => $request->post('lastName'),
+            'slug'       => Str::slug($request->post('firstName').$request->post('lastName').uniqid()),
+            'email'      => $request->post('email'),
+            'password'   => Hash::make($request->post('password'))
         ]);
 
         $this->storeVerifyUser($user->id, 'user.verify', 'user_id');
 
-        $this->sendMailVerification($request->post('name'), $request->post('email'), $this->verify_url);
+        $this->sendMailVerification($request->post('firstName') . ' ' .$request->post('lastName') , $request->post('email'), $this->verify_url);
     }
 
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -18,7 +19,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
         'slug',
         'email',
         'password',
@@ -29,6 +31,7 @@ class User extends Authenticatable
         'location',
         'about',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -101,6 +104,12 @@ class User extends Authenticatable
             return asset('admin/assets/img/default_user.png');
         }
         return asset('storage/users/' . $this->avatar);
+    }
+
+    public function getUserNameAttribute()
+    {
+        $userName = Str::title($this->firstName . ' ' .$this->lastName);
+        return $userName;
     }
 
 

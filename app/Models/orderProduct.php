@@ -14,6 +14,19 @@ class orderProduct extends pivot
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'order_id',
+        'user_id',
+        'product_id',
+        'supplier_id',
+        'product_name',
+        'price',
+        'quantity',
+        'size',
+        'color',
+        'image',
+    ];
+
     public function order()
     {
         return $this->belongsTo(Order::class);

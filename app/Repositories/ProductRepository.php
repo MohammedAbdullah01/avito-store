@@ -6,7 +6,7 @@ use App\Repositories\Interfaces\ICrudRepository;
 use App\Repositories\trait\Uploading;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\order_product;
+use App\Models\orderProduct;
 use Illuminate\Support\Str;
 use App\Models\Product;
 
@@ -132,7 +132,7 @@ class ProductRepository implements ICrudRepository
 
     public function getTopProductsOrderCount()
     {
-        return order_product::select(
+        return orderProduct::select(
             'product_name',
             'product_id',
             'price',

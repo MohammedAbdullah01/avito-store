@@ -22,7 +22,7 @@
                                 <p>{{ $supplier->about }}</p>
                                 <ul class="user-profile-list">
                                     <li><span>{{ __('Full Name') }}:</span>
-                                        {{ $supplier->name }}
+                                        {{ $supplier->SupplierName }}
                                     </li>
                                     <li>
                                         <span>{{ __('Country') }}:</span>

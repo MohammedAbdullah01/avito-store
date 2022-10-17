@@ -19,7 +19,7 @@ class CreateCartsTable extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete()->cascadeOnUpdate();
             // $table->foreignId('supplier_id')->nullable()->constrained('suppliers')->nullOnDelete();
-            $table->unsignedSmallInteger('quantity')->default(1) ;
+            $table->unsignedSmallInteger('product_quantity')->default(1) ;
             $table->string('size')->nullable();
             $table->string('color')->nullable();
             $table->unique(['cookie_id' , 'product_id']);

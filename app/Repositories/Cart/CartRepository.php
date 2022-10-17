@@ -17,7 +17,7 @@ class CartRepository implements ICartRepository
         return  Cart::with('product')->where('cookie_id', $this->getCookieId())->get();
     }
 
-    public function addCart(Product $product, int $quantity = 1 , $size , $color)
+    public function addCart(Product $product, int $quantity = 1, $size, $color)
     {
         $item = $this->getProductInCart($product->id);
 
@@ -34,7 +34,7 @@ class CartRepository implements ICartRepository
         return $item->increment('product_quantity', $quantity);
     }
 
-    public function setCart(Product $product, $id ,  $quantity)
+    public function setCart(Product $product, $id,  $quantity)
     {
         Cart::where('product_id', $product->id)
             ->where('cookie_id', $this->getCookieId())
@@ -53,7 +53,7 @@ class CartRepository implements ICartRepository
 
     public function emptyCart()
     {
-       return Cart::where('cookie_id', $this->getCookieId())
+        return Cart::where('cookie_id', $this->getCookieId())
             ->forceDelete();
     }
 
@@ -62,6 +62,11 @@ class CartRepository implements ICartRepository
         return $this->getCart()->sum(function ($item) {
             return   $subtotal =  $item->product_quantity * $item->product->PurchasePrice;
         });
+    }
+
+    public function totalOneProduct($item)
+    {
+            return   $subtotal =  $item->product_quantity * $item->product->PurchasePrice;
     }
 
     protected function getCookieId()

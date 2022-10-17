@@ -24,13 +24,15 @@ class CheckOutRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'  => 'required|string|between:6,max',
-            'email'       => 'required|email',
-            'phone'       => 'required',
-            'address'     => 'required',
-            'city'        => 'required',
-            'post_alcode' => 'required',
-            'country'     => 'required'
+            'address*.billing.firstName'   => 'required|alpha|exists:users,firstName',
+            'address*.billing.lastName'    => 'required|alpha|exists:users,lastName',
+            'address*.billing.email'       => 'required|email|exists:users,email',
+            'address*.billing.phone'       => 'required|numeric',
+            'address*.billing.country'     => 'required|alpha',
+            'address*.billing.city'        => 'required|alpha_dash',
+            'address*.billing.address'     => 'required|string',
+            'address*.billing.postAlCode'  => 'nullable|numeric',
+            'payment_method'               => 'nullable|in:CashOnDelivery,payPal',
         ];
     }
 }
