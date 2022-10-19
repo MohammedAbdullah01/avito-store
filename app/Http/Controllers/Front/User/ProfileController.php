@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Front\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\ChangePasswordProfileRequest;
+use App\Http\Requests\User\UpdateProfileRequest;
 use App\Repositories\UserProfile;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -46,7 +47,7 @@ class ProfileController extends Controller
         );
     }
 
-    public function update(Request $request)
+    public function update(UpdateProfileRequest $request)
     {
         $this->profileRepo->updateProfile($request);
         return redirect()->back()->with('success', 'Successfully Updated Profile');
@@ -62,8 +63,41 @@ class ProfileController extends Controller
         );
     }
 
-    public function changePassword(Request $request)
+    public function changePassword(ChangePasswordProfileRequest $request)
     {
         return $this->profileRepo->changePassword($request);
+    }
+
+    public function orders()
+    {
+        return view(
+            'front.pages.users.orders',
+            [
+                'orders' => $this->profileRepo->getOrders()
+            ]
+        );
+    }
+
+    public function invoices()
+    {
+        return view(
+            'front.pages.users.invoices',
+            [
+                'orders' => $this->profileRepo->getOrders(),
+                // 'subTotalInvoice' => $this->profileRepo->getSubTotalInvoice(),
+                // 'TotalInvoice' => $this->profileRepo->getTotalInvoice(),
+            ]
+        );
+
+    }
+
+    public function showOrder()
+    {
+        return view(
+            'front.pages.users.showOrder',
+            [
+                'user' => $this->profileRepo->getUser()
+            ]
+        );
     }
 }

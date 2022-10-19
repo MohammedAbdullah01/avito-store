@@ -30,8 +30,14 @@ class CheckOutRequest extends FormRequest
             'address*.billing.phone'       => 'required|numeric',
             'address*.billing.country'     => 'required|alpha',
             'address*.billing.city'        => 'required|alpha_dash',
-            'address*.billing.address'     => 'required|string',
-            'address*.billing.postAlCode'  => 'nullable|numeric',
+            'address*.billing.address'     => 'required|string|max:255',
+            'address*.shipping.firstName'  => 'nullable|alpha|exists:users,firstName',
+            'address*.shipping.lastName'   => 'nullable|alpha|exists:users,lastName',
+            'address*.shipping.email'      => 'nullable|email|exists:users,email',
+            'address*.shipping.phone'      => 'nullable|numeric',
+            'address*.shipping.country'    => 'nullable|alpha',
+            'address*.shipping.city'       => 'nullable|alpha_dash',
+            'address*.shipping.address'    => 'nullable|string|max:255',
             'payment_method'               => 'nullable|in:CashOnDelivery,payPal',
         ];
     }

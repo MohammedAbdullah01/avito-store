@@ -6,7 +6,7 @@
 
     <x-breadcrumb pagetitle="Edit Profile" lable="user" active="Edit Profile" />
 
-    <x-userProfile.page-wrapper-user :user="$user" />
+    <x-userProfile.page-wrapper-user />
 
     <section class="mt-3">
         <div class="container">
@@ -28,11 +28,19 @@
                             </div>
 
                             <label class="col-md-4 col-lg-3 col-form-label">
-                                {{ __('Full Name') }}
+                                {{ __('First Name') }}
                             </label>
 
                             <div class="col-md-8 col-lg-9">
-                                <x-form.input-error name="name" :value="$user->name" placeholder="Enter The FullName" />
+                                <x-form.input-error name="firstName" :value="$user->firstName" placeholder="Enter The FullName" />
+                            </div>
+
+                            <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('Last Name') }}
+                            </label>
+
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.input-error name="lastName" :value="$user->lastName" placeholder="Enter The FullName" />
                             </div>
 
                             <label class="col-md-4 col-lg-3 col-form-label">

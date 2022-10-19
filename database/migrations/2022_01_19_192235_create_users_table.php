@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->enum('gander' , ['Male' , 'Female'])->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->default('default_user.png');
+            $table->string('city')->nullable();
             $table->string('location')->nullable();
             $table->text('about')->nullable();
             $table->rememberToken();

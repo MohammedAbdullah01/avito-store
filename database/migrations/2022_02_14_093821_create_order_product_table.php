@@ -19,9 +19,11 @@ class CreateOrderProductTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
             $table->foreignId('supplier_id')->nullable()->constrained('suppliers')->nullOnDelete();
+            $table->foreignId('invoice_id')->nullable()->constrained('invoices')->nullOnDelete();
             $table->string('product_name');
             $table->unsignedFloat('price');
             $table->unsignedSmallInteger  ('quantity');
+            $table->unsignedFloat('total');
             $table->string('size');
             $table->string('color');
             $table->string('image')->nullable();

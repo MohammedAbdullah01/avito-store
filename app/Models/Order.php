@@ -14,7 +14,7 @@ class Order extends Model
         'number',
         'payment_method',
         'user_id',
-        'supplier_id',
+        // 'supplier_id',
         'total',
         'status',
         'payment_status',
@@ -42,10 +42,20 @@ class Order extends Model
             'id',
             'id'
         )->withPivot([
-            'price', 'quantity', 'product_name', 'size', 'color',
+            'price', 'quantity', 'product_name', 'size', 'color','total'
         ])->using(orderProduct::class)
             ->as('item');
     }
+
+    public function purchasedProducts()
+    {
+        return $this->hasMany(orderProduct::class);
+    }
+
+    // public function invoice()
+    // {
+    //     return $this->HasOne(Invoice::class);
+    // }
 
     public function addresses()
     {
@@ -54,14 +64,14 @@ class Order extends Model
 
     public function billingAddress()
     {
-        return $this->hasOne(OrderAddress::class, 'order_id','id','id')
-        ->where('type' , '=' , 'billing');
+        return $this->hasOne(OrderAddress::class, 'order_id', 'id', 'id')
+            ->where('type', '=', 'billing');
     }
 
     public function shippingAddress()
     {
-        return $this->hasOne(OrderAddress::class, 'order_id','id','id')
-        ->where('type' , '=' , 'shipping');
+        return $this->hasOne(OrderAddress::class)
+            ->where('type', '=', 'shipping');
     }
 
     protected static function booted()
@@ -98,21 +108,24 @@ class Order extends Model
     {
         if ($this->status == 'paid') {
 
-            return 'badge bg-success bi bi-check-circle me-1';
+            return 'label label-success';
         } elseif ($this->status == 'pending') {
 
-            return 'badge bg-warning text-dark bi bi-exclamation-triangle me-1';
+            return 'label label-warning';
         } elseif ($this->status == 'canceled') {
 
-            return 'badge bg-danger bi bi-exclamation-octagon me-1';
+            return 'label label-danger';
         } elseif ($this->status == 'shipped') {
 
-            return 'badge bg-primary bi bi-star me-1';
+            return 'label label-info';
+        }elseif($this->status == 'processing')
+        {
+            return 'label label-primary';
         }
     }
 
 
-    public function getOrderPyamentStatusAttribute()
+    public function getOrderPaymentStatusAttribute()
     {
         if ($this->payment_status == 'paid') {
 
@@ -126,3 +139,5 @@ class Order extends Model
         }
     }
 }
+
+

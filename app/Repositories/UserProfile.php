@@ -66,6 +66,42 @@ class UserProfile implements IProfileRepository
         return redirect()->route('user.login')->with('success', 'Successfully Changed Password');
     }
 
+
+    public function getOrders()
+    {
+        $user = $this->getUser();
+        $orders = $user->orders()->with('purchasedProducts')->withCount('purchasedProducts')->latest()->paginate();
+        return $orders;
+    }
+
+
+    // public function getInvoices()
+    // {
+    //     $user = $this->getUser();
+    //     $invoices = $user->orders()->with('purchasedProducts')->withCount('purchasedProducts')->latest()->paginate();
+    //     return $invoices;
+    // }
+
+    // public function getSubTotalInvoice()
+    // {
+    //     return $this->getInvoices()->groupBy('purchasedProducts.total')->sum(function ($item) {
+    //         return   $subtotal =  $item->purchasedProducts->quantity * $item->purchasedProducts->price;
+    //     });
+    //     // return $this->getInvoices()->purchasedProducts()->sum('total');
+    // }
+
+    // public function getTotalInvoice()
+    // {
+    //     return $this->getSubTotalInvoice() + 50;
+    // }
+
+
+
+    public function getDetailsOrder()
+    {
+        $user = $this->userModel::findOrFail(Auth::guard('web')->id());
+        return $user;
+    }
     public function getUser()
     {
         $user = $this->userModel::findOrFail(Auth::guard('web')->id());

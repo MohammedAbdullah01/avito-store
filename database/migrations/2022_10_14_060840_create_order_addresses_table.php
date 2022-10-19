@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('postAlCode')->nullable();
-            $table->char('country' , 3);
+            $table->char('country' , 6);
         });
     }
 

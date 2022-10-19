@@ -6,7 +6,7 @@
 
     <x-breadcrumb pagetitle="Change Password" lable="User" active="Change Password" />
 
-    <x-userProfile.page-wrapper-user :user="$user" />
+    <x-userProfile.page-wrapper-user  />
 
     <section class="mt-3">
         <div class="container">

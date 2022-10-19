@@ -27,6 +27,7 @@ class User extends Authenticatable
         'email_verified',
         'gander',
         'phone',
+        'city',
         'avatar',
         'location',
         'about',
@@ -95,6 +96,11 @@ class User extends Authenticatable
         public function ratings()
         {
             return $this->hasMany(Rating::class);
+        }
+
+        public function invoices()
+        {
+            return $this->hasMany(Invoice::class);
         }
 
     // Imag_User

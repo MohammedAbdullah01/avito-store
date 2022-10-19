@@ -11,91 +11,79 @@
                 <x-alert />
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="block billing-details">
-                            <h4 class="widget-title">Billing Details</h4>
-                            <form action="{{ route('user.checkout.store') }}" method="POST" class="checkout-form">
-                                @csrf
-                                @method('POST')
+                        <form action="{{ route('user.checkout.store') }}" method="POST" class="checkout-form">
+                            @csrf
+                            @method('POST')
+                            <div class="block billing-details">
+                                <h4 class="widget-title">Billing Details</h4>
 
-
-                                {{-- email
-                                phone
-                                address
-                                city
-                                postAlCode
-                                country --}}
-                                <x-form.input-error lable="First Name" name="address[billing][firstName]" :value="$user->firstName" />
+                                <x-form.input-error lable="First Name" name="address[billing][firstName]"
+                                    :value="$user->firstName" />
 
                                 <x-form.input-error lable="Last Name" name="address[billing][lastName]" :value="$user->lastName" />
 
-                                <x-form.input-error type="email" lable="Email" placeholder="you@example.com"
-                                    name="address[billing][email]" :value="$user->email" />
+                                <x-form.input-error type="email" lable="Email" name="address[billing][email]"
+                                    :value="$user->email" />
 
-                                <x-form.input-error lable="Phone" placeholder="01234...." name="address[billing][phone]"
-                                    :value="$user->phone" />
+                                <x-form.input-error lable="Phone" name="address[billing][phone]" :value="$user->phone" />
 
-                                <div class="form-group">
-                                    <select class="form-control " name="address[billing][country]" required>
-                                        @foreach ($countries as $code => $name)
-                                            <option value="{{ $code }}"
-                                                @if ($code == old('country')) selected @endif>
-                                                {{ $name }}</option>
-                                        @endforeach
-                                        <option>United States</option>
-                                    </select>
-                                    @error('country')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <x-form.input-error lable="Country" name="address[billing][country]" value="EGYPT" />
+
+                                <x-form.input-error lable="City" name="address[billing][city]" :value="$user->city" />
+
+                                <x-form.input-error lable="Address" name="address[billing][address]" :value="$user->location" />
+
+                            </div>
+
+
+                            <div class="block billing-details">
+                                <h4 class="widget-title">Shipping Details</h4>
+                                <x-form.input-error lable="First Name" name="address[shipping][firstName]"
+                                    :value="$user->firstName" />
+
+                                <x-form.input-error lable="Last Name" name="address[shipping][lastName]"
+                                    :value="$user->lastName" />
+
+                                <x-form.input-error type="email" lable="Email" name="address[shipping][email]"
+                                    :value="$user->email" />
+
+                                <x-form.input-error lable="Phone" name="address[shipping][phone]" :value="$user->phone" />
+
+                                <x-form.input-error lable="Country" name="address[shipping][country]" value="EGYPT" />
+
+                                <x-form.input-error lable="City" name="address[shipping][city]" :value="$user->city" />
+
+                                <x-form.input-error lable="Address" name="address[shipping][address]" :value="$user->location" />
+                            </div>
+
+
+
+                            <div class="block">
+                                <h4 class="widget-title">Payment Method</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="CashOnDelivery" type="radio"
+                                        name="payment_method" id="CashOnDelivery" checked>
+                                    <label class="form-check-label" for="CashOnDelivery">
+                                        <img src="{{ asset('frontEnd/images/cash-on-delivery-icon-14.jpg') }}"
+                                            width="115px" height="35" alt="">
+                                    </label>
                                 </div>
-
-                                <x-form.input-error lable="City" name="address[billing][city]" />
-
-                                <x-form.input-error lable="Address" placeholder="1234 Main St" name="address[billing][address]"
-                                    :value="$user->location" />
-
-                                    <div class="form-group">
-                                        <select class="form-control " name="payment_method" required>
-                                            <option value="CashOnDelivery">Cash On Delivery</option>
-                                            <option value="payPal">payPal</option>
-                                        </select>
-                                        @error('payment_method')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                <x-button value="Place Order" />
-                            </form>
-                        </div>
-                        {{-- <div class="block">
-                            <h4 class="widget-title">Payment Method</h4>
-                            <p>Credit Cart Details (Secure payment)</p>
-                            <div class="checkout-product-details">
-                                <div class="payment">
-                                    <div class="card-details">
-                                        <form class="checkout-form">
-                                            <div class="form-group">
-                                                <label for="card-number">Card Number <span class="required">*</span></label>
-                                                <input id="card-number" class="form-control" type="tel"
-                                                    placeholder="•••• •••• •••• ••••">
-                                            </div>
-                                            <div class="form-group half-width padding-right">
-                                                <label for="card-expiry">Expiry (MM/YY) <span
-                                                        class="required">*</span></label>
-                                                <input id="card-expiry" class="form-control" type="tel"
-                                                    placeholder="MM / YY">
-                                            </div>
-                                            <div class="form-group half-width padding-left">
-                                                <label for="card-cvc">Card Code <span class="required">*</span></label>
-                                                <input id="card-cvc" class="form-control" type="tel" maxlength="4"
-                                                    placeholder="CVC">
-                                            </div>
-                                            <a href="confirmation.html" class="btn btn-main mt-20">Place Order</a>
-                                        </form>
-                                    </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="payPal" type="radio" name="payment_method"
+                                        id="payPal">
+                                    <label class="form-check-label" for="payPal">
+                                        <img src="{{ asset('frontEnd/images/paypal-logo.16cf93e.svg') }}" alt="">
+                                    </label>
                                 </div>
                             </div>
-                        </div> --}}
+                            <x-button value="Place Order" />
+                        </form>
                     </div>
+
+
+
+
+
 
 
                     <div class="col-md-4">
@@ -123,8 +111,8 @@
                                                 onclick="event.preventDefault(); document.getElementById('remove_product_cart{{ $item->id }}').submit();">
                                                 {{ __('Remove') }}
                                             </a>
-                                            <form action="{{ route('user.product.cart.delete', $item->id) }}"
-                                                method="post" id="remove_product_cart{{ $item->id }}">
+                                            <form action="{{ route('user.product.cart.delete', $item->id) }}" method="post"
+                                                id="remove_product_cart{{ $item->id }}">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -156,9 +144,6 @@
                                     <span>
                                         <x-currancy :amount="$cart->totalCart() + 50" />
                                     </span>
-                                </div>
-                                <div class="verified-icon">
-                                    <img src="images/shop/verified.png">
                                 </div>
                             </div>
                         </div>

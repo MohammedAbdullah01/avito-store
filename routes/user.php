@@ -72,6 +72,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             Route::get('/profile/{name}/changePassword'   , [ProfileController::class  , 'editPassword'])
                 ->name('edit.password');
 
+            Route::get('/profile/{name}/MyOrders'         , [ProfileController::class  , 'orders'])
+                ->name('orders');
+
+            Route::get('/profile/{name}/invoices'         , [ProfileController::class  , 'invoices'])
+                ->name('invoices');
+
             Route::put('update/password/{id}'             , [ProfileController::class  , 'changePassword'])
                 ->name('change.password');
 

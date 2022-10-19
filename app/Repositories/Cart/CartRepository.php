@@ -64,9 +64,11 @@ class CartRepository implements ICartRepository
         });
     }
 
-    public function totalOneProduct($item)
+    public function totalOneProduct($supplierId)
     {
+        return $this->getCart()->where('product.supplier_id' , $supplierId)->sum(function ($item){
             return   $subtotal =  $item->product_quantity * $item->product->PurchasePrice;
+        });
     }
 
     protected function getCookieId()

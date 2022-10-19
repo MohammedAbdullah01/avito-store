@@ -22,6 +22,9 @@ class UserSeeder extends Seeder
             'slug' => 'mohamed-user',
             'email' => 'm@m.com',
             'password' => Hash::make('password'),
+            'phone' => '01154544438',
+            'city' => 'cairo',
+            'location' => '15- Mohamed Ahmed',
         ]);
 
         User::create([
@@ -30,6 +33,11 @@ class UserSeeder extends Seeder
             'slug' => 'ahmed-user',
             'email' => 'a@a.com',
             'password' => Hash::make('password'),
+            'phone' => '01154544438',
+            'city' => 'cairo',
+            'location' => '12- Mohamed Ahmed',
         ]);
+
+
     }
 }

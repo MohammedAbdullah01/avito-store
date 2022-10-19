@@ -12,7 +12,11 @@
                         <img class="media-object" src="{{ $item->product->mainPictureProduct }}" alt="image" />
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
+                        <h4 class="media-heading">
+                            <a href="#!">
+                                {{ $item->product->title }}
+                            </a>
+                        </h4>
                         <div class="cart-price">
                             <span>{{ $item->product_quantity }} x</span>
                             <span>
