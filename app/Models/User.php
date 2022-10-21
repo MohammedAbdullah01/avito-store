@@ -98,11 +98,6 @@ class User extends Authenticatable
             return $this->hasMany(Rating::class);
         }
 
-        public function invoices()
-        {
-            return $this->hasMany(Invoice::class);
-        }
-
     // Imag_User
     public function getImagUserAttribute()
     {
@@ -116,20 +111,6 @@ class User extends Authenticatable
     {
         $userName = Str::title($this->firstName . ' ' .$this->lastName);
         return $userName;
-    }
-
-
-    public static function rules($id)
-    {
-        return [
-            'name'     => "required|min:3|max:20|string",
-            'email'    => "required|email|string|unique:suppliers,email,$id",
-            'phone'    => "nullable|string",
-            'gander'   => "nullable|in:male,female",
-            'avatar'   => "nullable|mimes:jpg,jpeg,png|max:5048|dimensions:min_width=300 , min_height=300 , max_width=2000 , max_height=2000",
-            'about'    => "required|between:10,255",
-            'location' => "nullable|url|string",
-        ];
     }
 
 }

@@ -9,7 +9,7 @@
 
     <x-userProfile.page-wrapper-user />
 
-    <section class="mt-3">
+    <section class="section">
         <div class="container">
             <div class="col-md-12">
                 <div class="dashboard-wrapper user-dashboard">

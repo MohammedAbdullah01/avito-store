@@ -44,4 +44,6 @@ class Cart extends Pivot
     {
         return $this->belongsTo(User::class);
     }
+
+    
 }

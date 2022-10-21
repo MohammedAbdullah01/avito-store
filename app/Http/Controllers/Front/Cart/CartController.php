@@ -24,8 +24,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        if($this->cartRepo->getCart()->count() == 0)
-        {
+        if ($this->cartRepo->getCart()->count() == 0) {
             return view('front.pages.cart.emptyCart');
         }
         return view('front.pages.cart.cart', [
@@ -40,9 +39,10 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CartRequest $request)
+    public function store(Request $request)
     {
         $product = Product::findOrFail($request->post('product_id'));
+        $this->cartRepo->rules($request, $product->quantity);
         $this->cartRepo->addCart(
             $product,
             $request->post('product_quantity'),

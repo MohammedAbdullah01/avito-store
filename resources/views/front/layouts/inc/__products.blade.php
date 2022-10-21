@@ -18,11 +18,11 @@
                             <li>
                                 @if (!Auth::guard('supplier')->check())
                                     <a href="{{ route('user.favorite.products.store') }}"
-                                        onclick="event.preventDefault(); document.getElementById('favorite_store').submit();">
-                                        <x-favorite :productId="$product->id" />
+                                        onclick="event.preventDefault(); document.getElementById('favorite_store{{$product->id}}').submit();">
+                                        <x-favorite productId="{{$product->id}}" />
                                     </a>
                                     <form action="{{ route('user.favorite.products.store') }}" method="post"
-                                        id="favorite_store">
+                                        id="favorite_store{{$product->id}}">
                                         <input type="hidden" value="{{ $product->id }}" name="product_id">
                                         @csrf
                                         @method('POST')

@@ -3,6 +3,8 @@
 namespace App\View\Components;
 
 use App\Models\Admin;
+use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
@@ -16,19 +18,32 @@ class Notification extends Component
      */
 
     public $notifications;
-    public $unredcount;
+    public $unreadCount;
 
 
     public function __construct()
     {
         //
-        $user = Auth::guard('supplier')->user();
+        // $user = Auth::guard('supplier')->user();
 
-        $notifications = $user->unreadNotifications()->latest()->limit(4)->get();
+        if (Auth::guard('supplier')->check()) {
 
-        $unredcount    = $user->unreadNotifications ()->count();
+            $user = Supplier::where('id', Auth::guard('supplier')->user()->id)->first();
 
-        $this->unredcount    = $unredcount;
+            $notifications = $user->unreadNotifications()->latest()->limit(4)->get();
+
+            $unreadCount    = $user->unreadNotifications()->count();
+        } elseif (Auth::guard('web')->check()) {
+            $user = User::where('id', Auth::guard('web')->user()->id)->first();
+
+            $notifications = $user->unreadNotifications()->latest()->limit(4)->get();
+
+            $unreadCount    = $user->unreadNotifications()->count();
+        }
+
+
+
+        $this->unreadCount    = $unreadCount;
         $this->notifications = $notifications;
     }
 

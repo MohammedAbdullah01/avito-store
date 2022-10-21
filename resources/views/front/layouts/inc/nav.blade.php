@@ -85,8 +85,10 @@
                                             @method('POST')
                                         </form>
                                     </li>
+
                                 </ul>
                             </li>
+                            <x-notification />
                         @endif
 
                         <!-- Dropdown User Authantcation -->
@@ -124,6 +126,8 @@
                                     </li>
                                 </ul>
                             </li>
+                            <x-notification />
+
                         @endif
 
                     </ul>

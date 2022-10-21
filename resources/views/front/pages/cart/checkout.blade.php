@@ -17,43 +17,66 @@
                             <div class="block billing-details">
                                 <h4 class="widget-title">Billing Details</h4>
 
-                                <x-form.input-error lable="First Name" name="address[billing][firstName]"
-                                    :value="$user->firstName" />
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error lable="First Name" name="address[billing][firstName]"
+                                        :value="$user->firstName" />
 
-                                <x-form.input-error lable="Last Name" name="address[billing][lastName]" :value="$user->lastName" />
+                                    <x-form.input-error lable="Last Name" name="address[billing][lastName]"
+                                        :value="$user->lastName" />
+                                </div>
 
-                                <x-form.input-error type="email" lable="Email" name="address[billing][email]"
-                                    :value="$user->email" />
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error type="email" lable="Email" name="address[billing][email]"
+                                        :value="$user->email" />
 
-                                <x-form.input-error lable="Phone" name="address[billing][phone]" :value="$user->phone" />
+                                    <x-form.input-error lable="Phone" name="address[billing][phone]" :value="$user->phone" />
+                                </div>
 
-                                <x-form.input-error lable="Country" name="address[billing][country]" value="EGYPT" />
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error lable="Country" name="address[billing][country]" value="EGYPT" />
 
-                                <x-form.input-error lable="City" name="address[billing][city]" :value="$user->city" />
+                                    <x-form.input-error lable="City" name="address[billing][city]" :value="$user->city" />
+                                </div>
 
-                                <x-form.input-error lable="Address" name="address[billing][address]" :value="$user->location" />
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error lable="House Number" type=number
+                                        name="address[billing][houseNumber]" />
 
+                                    <x-form.input-error lable="Street Name" name="address[billing][streetName]" />
+                                </div>
                             </div>
 
 
                             <div class="block billing-details">
                                 <h4 class="widget-title">Shipping Details</h4>
-                                <x-form.input-error lable="First Name" name="address[shipping][firstName]"
-                                    :value="$user->firstName" />
 
-                                <x-form.input-error lable="Last Name" name="address[shipping][lastName]"
-                                    :value="$user->lastName" />
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error lable="First Name" name="address[shipping][firstName]"
+                                        :value="$user->firstName" />
 
-                                <x-form.input-error type="email" lable="Email" name="address[shipping][email]"
-                                    :value="$user->email" />
+                                    <x-form.input-error lable="Last Name" name="address[shipping][lastName]"
+                                        :value="$user->lastName" />
+                                </div>
 
-                                <x-form.input-error lable="Phone" name="address[shipping][phone]" :value="$user->phone" />
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error type="email" lable="Email" name="address[shipping][email]"
+                                        :value="$user->email" />
 
-                                <x-form.input-error lable="Country" name="address[shipping][country]" value="EGYPT" />
+                                    <x-form.input-error lable="Phone" name="address[shipping][phone]" :value="$user->phone" />
+                                </div>
 
-                                <x-form.input-error lable="City" name="address[shipping][city]" :value="$user->city" />
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error lable="Country" name="address[shipping][country]" value="EGYPT" />
 
-                                <x-form.input-error lable="Address" name="address[shipping][address]" :value="$user->location" />
+                                    <x-form.input-error lable="City" name="address[shipping][city]" :value="$user->city" />
+                                </div>
+
+                                <div class="checkout-country-code clearfix">
+                                    <x-form.input-error lable="House Number" type=number
+                                        name="address[shipping][houseNumber]" />
+
+                                    <x-form.input-error lable="Street Name" name="address[shipping][streetName]" />
+                                </div>
                             </div>
 
 

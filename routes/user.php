@@ -63,13 +63,19 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             Route::get('/profile/{name}'                  , [ProfileController::class  , 'profile'])
                 ->name('profile');
 
-            Route::get('/profile/{name}/edit'             , [ProfileController::class  , 'edit'])
+            Route::get('/dashboard'                       , [ProfileController::class  , 'dashboard'])
+                ->name('dashboard');
+
+            Route::get('/favorite'                        , [ProfileController::class  , 'favorite'])
+                ->name('favorite');
+
+            Route::get('edit/profile'             , [ProfileController::class  , 'edit'])
                 ->name('edit.profile');
 
             Route::put('/profile/update/'                 , [ProfileController::class  , 'update'])
                 ->name('update');
 
-            Route::get('/profile/{name}/changePassword'   , [ProfileController::class  , 'editPassword'])
+            Route::get('changePassword/profile'   , [ProfileController::class  , 'editPassword'])
                 ->name('edit.password');
 
             Route::get('/profile/{name}/MyOrders'         , [ProfileController::class  , 'orders'])

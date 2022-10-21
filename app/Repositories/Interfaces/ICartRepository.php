@@ -21,4 +21,6 @@ interface ICartRepository
     public function totalCart() : float;
 
     public function totalOneProduct($item) ;
+
+    public function rules($request, $quantity) ;
 }

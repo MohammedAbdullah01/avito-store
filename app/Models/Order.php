@@ -14,10 +14,10 @@ class Order extends Model
         'number',
         'payment_method',
         'user_id',
-        // 'supplier_id',
         'total',
         'status',
         'payment_status',
+        'shipping',
     ];
 
     public function supplier()
@@ -42,9 +42,9 @@ class Order extends Model
             'id',
             'id'
         )->withPivot([
-            'price', 'quantity', 'product_name', 'size', 'color','total'
+            'price', 'quantity', 'product_name', 'size', 'color', 'total'
         ])->using(orderProduct::class)
-            ->as('item');
+            ->as('orderProduct');
     }
 
     public function purchasedProducts()
@@ -118,8 +118,7 @@ class Order extends Model
         } elseif ($this->status == 'shipped') {
 
             return 'label label-info';
-        }elseif($this->status == 'processing')
-        {
+        } elseif ($this->status == 'processing') {
             return 'label label-primary';
         }
     }
@@ -139,5 +138,3 @@ class Order extends Model
         }
     }
 }
-
-

@@ -8,7 +8,7 @@
 
     <x-userProfile.page-wrapper-user />
 
-    <section class="mt-3">
+    <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -60,6 +60,14 @@
                             </div>
 
                             <label class="col-md-4 col-lg-3 col-form-label">
+                                {{ __('City') }}
+                            </label>
+
+                            <div class="col-md-8 col-lg-9">
+                                <x-form.input-error name="city" :value="$user->city" placeholder="Enter The City" />
+                            </div>
+
+                            <label class="col-md-4 col-lg-3 col-form-label">
                                 {{ __('Address') }}
                             </label>
 
@@ -73,14 +81,6 @@
 
                             <div class="col-md-8 col-lg-9">
                                 <x-form.gander_Select name="gander" :value="$user->gander" />
-                            </div>
-
-                            <label class="col-md-4 col-lg-3 col-form-label">
-                                {{ __('About Me') }}
-                            </label>
-
-                            <div class="col-md-8 col-lg-9">
-                                <x-form.textarea name="about" :value="$user->about" placeholder="Enter The About Me" />
                             </div>
 
                             <x-button colorButton="success mt-3" value="Save" />

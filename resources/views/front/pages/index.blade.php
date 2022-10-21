@@ -3,6 +3,9 @@
 @section('content')
 
     @include('front.layouts.inc.nav')
+    <div class="container">
+        <x-alert />
+    </div>
     @include('front.layouts.inc.__hero-slider')
 
     <!-- Latest Categories -->

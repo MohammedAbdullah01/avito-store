@@ -24,7 +24,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'phone' => '01154544438',
             'city' => 'cairo',
-            'location' => '15- Mohamed Ahmed',
         ]);
 
         User::create([
@@ -35,7 +34,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'phone' => '01154544438',
             'city' => 'cairo',
-            'location' => '12- Mohamed Ahmed',
         ]);
 
 

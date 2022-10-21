@@ -1,4 +1,97 @@
-<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+{{-- <nav class="header-nav ms-auto"> --}}
+{{-- <ul class="d-flex align-items-center">
+
+    <li class="nav-item dropdown">
+
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+        </a><!-- End Notification Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+                You have 4 new notifications
+                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                    <h4>Lorem Ipsum</h4>
+                    <p>Quae dolorem earum veritatis oditseno</p>
+                    <p>30 min. ago</p>
+                </div>
+            </li>
+
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+                <i class="bi bi-x-circle text-danger"></i>
+                <div>
+                    <h4>Atque rerum nesciunt</h4>
+                    <p>Quae dolorem earum veritatis oditseno</p>
+                    <p>1 hr. ago</p>
+                </div>
+            </li>
+
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+                <i class="bi bi-check-circle text-success"></i>
+                <div>
+                    <h4>Sit rerum fuga</h4>
+                    <p>Quae dolorem earum veritatis oditseno</p>
+                    <p>2 hrs. ago</p>
+                </div>
+            </li>
+
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                <div>
+                    <h4>Dicta reprehenderit</h4>
+                    <p>Quae dolorem earum veritatis oditseno</p>
+                    <p>4 hrs. ago</p>
+                </div>
+            </li>
+
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+                <a href="#">Show all notifications</a>
+            </li>
+
+        </ul><!-- End Notification Dropdown Items -->
+
+    </li><!-- End Notification Nav -->
+
+</ul> --}}
+{{-- </nav> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
     data-notify="{{ $unredcount }}">
     <i class="bi bi-bell"></i>
 </div>
@@ -67,4 +160,57 @@
         </div>
 
     </div>
-</div>
+</div> --}}
+
+
+
+<li class="dropdown search dropdown-slide">
+    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <i class="bi bi-bell"></i>
+        @if ($unreadCount)
+            <span class="badge bg-danger badge-number" style="position: relative; bottom: 12px; right: 18px;">
+                {{ $unreadCount }}
+            </span>
+        @endif
+    </a><!-- End Notification Icon -->
+    <ul class="dropdown-menu search-dropdown" style="left: 55px; right:unset; top: 60%; margin: 6px; width: 68%;">
+        @forelse ($notifications as $notification)
+            <div class="media">
+                <a class="pull-left" href="#!">
+                    <i class="bi bi-file-text-fill"></i>
+                    <i class="{{ $notification->data['icon'] }}"></i>
+                </a>
+                <div class="media-body">
+                    <a href="#!">
+                    <h5 class="media-heading">
+                            {{ $notification->data['title'] }}
+                        </h5>
+                        <div class="cart-price text-secondary">
+                            <span>{{ $notification->data['body'] }}</span>
+                        </div>
+                        <h5><strong></strong></h5>
+                    </a>
+                </div>
+
+            </div>
+        @empty
+            <div class="media">
+                <div class="media-body text-center">
+                    <h5>
+                        <strong>
+                            {{ __('No There Notifications') }}
+                            <i class="bi bi-emoji-frown"></i>
+                        </strong>
+                    </h5>
+                </div>
+
+            </div>
+        @endforelse
+        {{-- <ul class="text-center "> --}}
+            <li><a href="{{ route('user.cart.index') }}" class="btn btn-primary ">Show Notifications All</a></li>
+            </li>
+        {{-- </ul> --}}
+
+
+    </ul>
+</li>

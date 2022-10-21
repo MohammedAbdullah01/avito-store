@@ -18,15 +18,21 @@ class OrderAddress extends Model
         'lastName',
         'email',
         'phone',
-        'address',
-        'city',
-        'postAlCode',
         'country',
+        'city',
+        'houseNumber',
+        'streetName',
     ];
 
     public function getUserNameAttribute()
     {
-        $userName = Str::title($this->firstName . ' ' .$this->lastName);
+        $userName = Str::title($this->firstName . ' ' . $this->lastName);
         return $userName;
+    }
+
+    public function getAddressAttribute()
+    {
+        $address =  $this->houseNumber . '/' .  $this->streetName;
+        return $address;
     }
 }

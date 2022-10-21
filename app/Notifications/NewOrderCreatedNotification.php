@@ -12,28 +12,14 @@ use Illuminate\Notifications\Notification;
 class NewOrderCreatedNotification extends Notification
 {
     use Queueable;
-
-    protected $order;
-    protected $product_name;
-    protected $quantity;
-    protected $size;
-    protected $color;
-    protected $image;
-    protected $price;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Order $order , $product_name, $quantity ,$size ,$color ,$image , $price)
+    public function __construct(protected Order $order)
     {
-        $this->order        = $order;
-        $this->product_name = $product_name;
-        $this->quantity     = $quantity;
-        $this->size         = $size;
-        $this->color        = $color;
-        $this->image        = $image;
-        $this->price        = $price;
+        $this->order = $order;
     }
 
     /**
@@ -56,7 +42,7 @@ class NewOrderCreatedNotification extends Notification
     // public function toMail($notifiable)
     // {
     //     return (new MailMessage)
-    //         ->subject('New Order')                      //Message text
+    //         ->subject("New Order #{$this->order->number}")                      //Message text
 
     //         ->greeting('Hello, ' . $notifiable->name)  //Welcome message to the customer
     //         ->line('The introduction to the notification.')
@@ -66,15 +52,11 @@ class NewOrderCreatedNotification extends Notification
 
     public function toDatabase($notifiable)
     {
-        
-        return[
-            'title'      => $this->order->number ,
-            'body'       =>  $this->product_name,
-            'quantity'   =>  ' X ' .$this->quantity,
-            'size'       =>  $this->size  ,
-            'color'      =>  $this->color ,
-            'icon'       =>  $this->image ,
-            'price'      =>  $this->price ,
+
+        return [
+            'title'      => "A New Order (#{$this->order->number})",
+            'body'       =>  "Created By {$this->order->user->UserName}",
+            'icon'       =>  'bi bi-file-text-fill',
             'order_id'   =>  $this->order->id,
         ];
     }

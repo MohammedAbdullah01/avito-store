@@ -66,7 +66,7 @@ class CartRepository implements ICartRepository
 
     public function totalOneProduct($supplierId)
     {
-        return $this->getCart()->where('product.supplier_id' , $supplierId)->sum(function ($item){
+        return $this->getCart()->where('product.supplier_id', $supplierId)->sum(function ($item) {
             return   $subtotal =  $item->product_quantity * $item->product->PurchasePrice;
         });
     }
@@ -86,5 +86,16 @@ class CartRepository implements ICartRepository
     {
         return Cart::where('product_id', $productId)
             ->where('cookie_id', $this->getCookieId())->first();
+    }
+
+
+    public function rules($request, $quantity)
+    {
+        $request->validate([
+            'product_id'         => ['required', 'integer', 'exists:products,id'],
+            'product_quantity'   => ['integer', 'min:1', "max:$quantity"],
+            'size'               => ['required', 'string'],
+            'color'              => ['required', 'string'],
+        ]);
     }
 }

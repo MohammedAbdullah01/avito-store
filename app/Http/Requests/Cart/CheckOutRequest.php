@@ -24,21 +24,24 @@ class CheckOutRequest extends FormRequest
     public function rules()
     {
         return [
-            'address*.billing.firstName'   => 'required|alpha|exists:users,firstName',
-            'address*.billing.lastName'    => 'required|alpha|exists:users,lastName',
-            'address*.billing.email'       => 'required|email|exists:users,email',
-            'address*.billing.phone'       => 'required|numeric',
-            'address*.billing.country'     => 'required|alpha',
-            'address*.billing.city'        => 'required|alpha_dash',
-            'address*.billing.address'     => 'required|string|max:255',
-            'address*.shipping.firstName'  => 'nullable|alpha|exists:users,firstName',
-            'address*.shipping.lastName'   => 'nullable|alpha|exists:users,lastName',
-            'address*.shipping.email'      => 'nullable|email|exists:users,email',
-            'address*.shipping.phone'      => 'nullable|numeric',
-            'address*.shipping.country'    => 'nullable|alpha',
-            'address*.shipping.city'       => 'nullable|alpha_dash',
-            'address*.shipping.address'    => 'nullable|string|max:255',
-            'payment_method'               => 'nullable|in:CashOnDelivery,payPal',
+            'address*.billing.firstName'    => 'required|alpha|exists:users,firstName',
+            'address*.billing.lastName'     => 'required|alpha|exists:users,lastName',
+            'address*.billing.email'        => 'required|email|exists:users,email',
+            'address*.billing.phone'        => 'required|numeric',
+            'address*.billing.country'      => 'required|alpha',
+            'address*.billing.city'         => 'required|alpha_dash',
+            'address*.billing.streetName'   => 'required|string|max:30',
+            'address*.billing.houseNumber'  => 'required|numeric|min:1',
+
+            'address*.shipping.firstName'   => 'nullable|alpha|exists:users,firstName',
+            'address*.shipping.lastName'    => 'nullable|alpha|exists:users,lastName',
+            'address*.shipping.email'       => 'nullable|email|exists:users,email',
+            'address*.shipping.phone'       => 'nullable|numeric',
+            'address*.shipping.country'     => 'nullable|alpha',
+            'address*.shipping.city'        => 'nullable|alpha_dash',
+            'address*.shipping.streetName'  => 'nullable|string|max:30',
+            'address*.shipping.houseNumber' => 'nullable|numeric|min:1',
+            'payment_method'                => 'nullable|in:CashOnDelivery,payPal',
         ];
     }
 }

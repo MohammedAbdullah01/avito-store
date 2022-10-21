@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\ChangePasswordProfileRequest;
 use App\Http\Requests\User\UpdateProfileRequest;
 use App\Repositories\UserProfile;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -20,7 +21,7 @@ class ProfileController extends Controller
             'front.pages.users.profile',
             [
                 'user'      => $this->profileRepo->getProfile($slug),
-                'products'  => $this->profileRepo->getMemberProduct(),
+
             ]
         );
     }
@@ -37,6 +38,23 @@ class ProfileController extends Controller
     //     return view('front.pages.users.profile', compact('user', 'favourites_products', 'number_of_purchases', 'orderuser'));
     // }
 
+    public function dashboard()
+    {
+        return view(
+            'front.pages.users.dashboard'
+        );
+    }
+
+    public function favorite()
+    {
+        return view(
+            'front.pages.users.favorite',
+            [
+                'products'  => $this->profileRepo->getMemberProduct(),
+            ]
+        );
+    }
+
     public function edit()
     {
         return view(
@@ -50,7 +68,7 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request)
     {
         $this->profileRepo->updateProfile($request);
-        return redirect()->back()->with('success', 'Successfully Updated Profile');
+        return redirect()->route('user.profile' , Auth::guard('web')->user()->slug)->with('success', 'Successfully Updated Profile');
     }
 
     public function editPassword()
@@ -88,7 +106,6 @@ class ProfileController extends Controller
                 // 'TotalInvoice' => $this->profileRepo->getTotalInvoice(),
             ]
         );
-
     }
 
     public function showOrder()

@@ -38,13 +38,13 @@ class UserProfile implements IProfileRepository
         $user = $this->getUser();
 
         $user->update([
-            'name'     => $request->post('name'),
-            'slug'     => Str::slug($request->post('name')),
+            'firstName'  => $request->post('firstName'),
+            'lastName'   => $request->post('lastName'),
             'email'    => $request->post('email'),
             'phone'    => $request->post('phone'),
+            'city'    => $request->post('city'),
             'gander'   => $request->post('gander'),
             'location' => $request->post('location'),
-            'about'    => $request->post('about')
         ]);
 
         $this->uploadFile($request->File('avatar'), 'users', $user, 'avatar', 'update');

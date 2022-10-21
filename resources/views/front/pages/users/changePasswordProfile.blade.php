@@ -8,7 +8,7 @@
 
     <x-userProfile.page-wrapper-user  />
 
-    <section class="mt-3">
+    <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

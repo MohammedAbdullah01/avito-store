@@ -31,7 +31,6 @@ class UpdateProfileRequest extends FormRequest
             'phone'    => "nullable|string",
             'gander'   => "nullable|in:male,female",
             'avatar'   => "nullable|mimes:jpg,jpeg,png|max:5048|dimensions:min_width=300 , min_height=300 , max_width=2000 , max_height=2000",
-            'about'    => "required|between:10,255",
             'location' => "nullable|string|max:255",
         ];
     }

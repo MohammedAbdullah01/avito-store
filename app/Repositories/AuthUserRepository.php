@@ -38,7 +38,7 @@ class AuthUserRepository extends AuthRepositoryAbstract
 
             $name = Auth::guard('web')->user()->slug;
 
-            return redirect()->route('user.profile', $name)->with('success', "Welcome, Sir. [ $name ]");
+            return redirect()->route('user.profile', $name)->with('success', "Welcome, Sir ( " . Auth::guard('web')->user()->UserName . " )");
         }
         return redirect()->back()->with('error', "Incorrect Password");
     }
@@ -61,14 +61,14 @@ class AuthUserRepository extends AuthRepositoryAbstract
 
             'firstName'  => $request->post('firstName'),
             'lastName'   => $request->post('lastName'),
-            'slug'       => Str::slug($request->post('firstName').$request->post('lastName').uniqid()),
+            'slug'       => Str::slug($request->post('firstName') . $request->post('lastName') . uniqid()),
             'email'      => $request->post('email'),
             'password'   => Hash::make($request->post('password'))
         ]);
 
         $this->storeVerifyUser($user->id, 'user.verify', 'user_id');
 
-        $this->sendMailVerification($request->post('firstName') . ' ' .$request->post('lastName') , $request->post('email'), $this->verify_url);
+        $this->sendMailVerification($request->post('firstName') . ' ' . $request->post('lastName'), $request->post('email'), $this->verify_url);
     }
 
 

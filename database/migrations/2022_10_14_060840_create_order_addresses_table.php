@@ -21,10 +21,11 @@ return new class extends Migration
             $table->string('lastName');
             $table->string('email');
             $table->string('phone');
-            $table->string('address');
-            $table->string('city');
-            $table->string('postAlCode')->nullable();
             $table->char('country' , 6);
+            $table->string('city');
+            $table->unsignedFloat('houseNumber');
+            $table->string('streetName');
+
         });
     }
 
