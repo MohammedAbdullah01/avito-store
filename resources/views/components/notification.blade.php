@@ -175,22 +175,25 @@
     </a><!-- End Notification Icon -->
     <ul class="dropdown-menu search-dropdown" style="left: 55px; right:unset; top: 60%; margin: 6px; width: 68%;">
         @forelse ($notifications as $notification)
-            <div class="media">
+            <div class="media" @if ($notification->unread()) style="background-color: #eaf1f7" @endif>
                 <a class="pull-left" href="#!">
-                    <i class="bi bi-file-text-fill"></i>
                     <i class="{{ $notification->data['icon'] }}"></i>
+                    {{-- --}}
                 </a>
                 <div class="media-body">
-                    <a href="#!">
-                    <h5 class="media-heading">
+                    <a href="{{route('home')}}?notification_id={{$notification->id}}">
+                        <h5 class="media-heading">
                             {{ $notification->data['title'] }}
                         </h5>
                         <div class="cart-price text-secondary">
                             <span>{{ $notification->data['body'] }}</span>
                         </div>
-                        <h5><strong></strong></h5>
+                        <h5>
+                            {{ $notification->created_at->longAbsoluteDiffForHumans() }}
+                        </h5>
                     </a>
                 </div>
+                <hr style="margin-top: 0px;margin-bottom: 0px;border-top: 3px solid #eee">
 
             </div>
         @empty
@@ -206,11 +209,9 @@
 
             </div>
         @endforelse
-        {{-- <ul class="text-center "> --}}
-            <li><a href="{{ route('user.cart.index') }}" class="btn btn-primary ">Show Notifications All</a></li>
-            </li>
-        {{-- </ul> --}}
+        <li><a href="{{ route('user.cart.index') }}" class="btn btn-primary ">Show Notifications All</a></li>
+</li>
 
 
-    </ul>
+</ul>
 </li>

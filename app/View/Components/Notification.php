@@ -30,20 +30,24 @@ class Notification extends Component
 
             $user = Supplier::where('id', Auth::guard('supplier')->user()->id)->first();
 
-            $notifications = $user->unreadNotifications()->latest()->limit(4)->get();
-
-            $unreadCount    = $user->unreadNotifications()->count();
+            $notifications = $user->notifications()->latest()->limit(10)->get();
+            $unreadCount   = $user->unreadNotifications()->count();
+            
         } elseif (Auth::guard('web')->check()) {
             $user = User::where('id', Auth::guard('web')->user()->id)->first();
 
-            $notifications = $user->unreadNotifications()->latest()->limit(4)->get();
+            $notifications = $user->notifications()->latest()->limit(10)->get();
+            $unreadCount   = $user->unreadNotifications()->count();
 
-            $unreadCount    = $user->unreadNotifications()->count();
+        } elseif (Auth::guard('admin')->check()) {
+            $user = User::where('id', Auth::guard('admin')->user()->id)->first();
+
+            $notifications = $user->notifications()->latest()->limit(10)->get();
+
+            $unreadCount   = $user->unreadNotifications()->count();
         }
 
-
-
-        $this->unreadCount    = $unreadCount;
+        $this->unreadCount   = $unreadCount;
         $this->notifications = $notifications;
     }
 
